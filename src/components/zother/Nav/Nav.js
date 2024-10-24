@@ -5,46 +5,65 @@ import Novel from "../../Novel/Novel";
 import Song from "../../Song/Song";
 
 import "./Nav.css"
+import { useState } from "react";
 
 const nav_list = [
     {
         path: "/diary",
         element: <Diary />,
-        titile: "小狗日记"
+        titile: "小狗日记",
+        id: 1
     },
     {
         path: "/draw",
         element: <Draw />,
-        titile: "画一幅画"
+        titile: "画一幅画",
+        id: 2
     },
     {
         path: "/novel",
         element: <Novel />,
-        titile: "写本小说"
+        titile: "写本小说",
+        id: 3
     },
     {
         path: "/song",
         element: <Song />,
-        titile: "唱一首歌"
+        titile: "唱一首歌",
+        id: 4
     }
 ]
-function NavButton({ path, children }) {
+function NavButton({ item, children, className, convert }) {
     const navigate = useNavigate();
     return (
-        <button onClick={() => navigate(path)}>{children}</button>
+        <button className={className}
+            onClick={() => {
+                navigate(item.path)
+                convert(item.id)
+            }}>{children}</button>
     )
 }
-function Nav() {
 
+function Nav() {
+    const [selected, SetSelected] = useState(1);
+    function convert(index) {
+        SetSelected(index)
+    }
     return (
         <>
             <div id="logo">Border/Collie</div>
             <header>
                 <nav>
                     <ul>
-                        {nav_list.map((item, index) => {
+                        {nav_list.map((item) => {
                             return (
-                                <li key={index}><NavButton path={item.path}>{item.titile}</NavButton></li>
+                                <li key={item.id}>
+                                    <NavButton item={item}
+                                        convert={convert}
+                                        className={(selected === item.id) ? "active" : ""}>
+                                        {item.titile}
+                                    </NavButton>
+                                </li>
                             )
                         })}
                     </ul>
