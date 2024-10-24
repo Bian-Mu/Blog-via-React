@@ -1,0 +1,66 @@
+nav {
+    background-color: rgba(244, 202, 231, 0.5);
+}
+
+ul {
+    list-style-type: none;
+}
+
+header {
+    display: inline-block;
+    width: 72vw;
+}
+
+nav {
+    width: 75vw;
+    height: 8vh;
+    margin-left: -1.5vw;
+    margin-bottom: 3vh;
+    border-radius: 0.6cm;
+}
+
+nav ul {
+    display: flex;
+    padding-top: 0.5%;
+    flex-direction: row;
+}
+
+nav li {
+    text-align: center;
+    flex: 1;
+    font-size: 25px;
+    margin-left: -3%;
+}
+
+nav button {
+    font-size: 22px;
+    padding: 3% 6% 3% 6%;
+    border-radius: 0.8cm;
+    border: none;
+    background-color: rgba(244, 202, 231, 0);
+    text-decoration: none;
+    color: black;
+}
+
+
+nav button:hover {
+    background-color: rgba(201, 255, 255, 0.61);
+    padding: 3% 6% 3% 6%;
+    border-radius: 0.8cm;
+}
+
+#logo {
+    font-size: 40px;
+    font-weight: 520;
+    display: inline-block;
+    width: 20vw;
+    margin-bottom: 4vh;
+    margin-left: 3.5vw;
+
+    background: url(../../../assets/image/avatar.jpg) no-repeat center;
+    background-size: 300% 675%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    mix-blend-mode: multiply;
+}

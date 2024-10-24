@@ -4,6 +4,7 @@ import Draw from "../../Draw/Draw";
 import Novel from "../../Novel/Novel";
 import Song from "../../Song/Song";
 
+import "./Nav.css"
 
 const nav_list = [
     {
@@ -36,15 +37,20 @@ function NavButton({ path, children }) {
 function Nav() {
 
     return (
-        <nav>
-            <ul>
-                {nav_list.map((item, index) => {
-                    return (
-                        <li key={index}><NavButton path={item.path}>{item.titile}</NavButton></li>
-                    )
-                })}
-            </ul>
-        </nav>
+        <>
+            <div id="logo">Border/Collie</div>
+            <header>
+                <nav>
+                    <ul>
+                        {nav_list.map((item, index) => {
+                            return (
+                                <li key={index}><NavButton path={item.path}>{item.titile}</NavButton></li>
+                            )
+                        })}
+                    </ul>
+                </nav>
+            </header>
+        </>
     )
 }
 

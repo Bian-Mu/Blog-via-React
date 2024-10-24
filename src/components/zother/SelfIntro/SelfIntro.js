@@ -1,37 +1,40 @@
+import "./SelfIntro.css"
+import avatar from "../../../assets/image/avatar.jpg"
 
 const contact_list = [
     {
-        target: "github",
+        target: "Github",
         src: "https://github.com/Bian-Mu"
     },
+    // {
+    //     target: "email",
+    //     src: "bianmu.sky@gmail.com"
+    // },
     {
-        target: "email",
-        src: "bianmu.sky@gamil.com"
-    },
-    {
-        target: "telegram",
+        target: "Telegram",
         src: "https://t.me/Jiang_Yang"
     }
 ]
 function SelfIntro() {
     return (
-        <div className="self-intro">
-            <div id="avatar">
-                {/* <Image />
-                <Text /> */}
-            </div>
+        <aside className="self-intro">
+            <figure>
+                <img src={avatar} alt="头像" id="avatar" />
+            </figure>
             <div id="contact">
+                <span>To contact:</span>
+                <hr />
                 <ul id="contact-list">
                     {contact_list.map((item, index) => {
-                        return <li key={index}><a href={item.src}>{item.target}</a></li>
+                        return <p><li key={index}><a href={item.src}>{item.target}</a></li></p>
                     })}
                 </ul>
             </div>
             <hr />
             <p id="description">
-                aaaaaaaaaaaaaaaaaaaaaaa
+                个人博客
             </p>
-        </div>
+        </aside>
     )
 }
 
