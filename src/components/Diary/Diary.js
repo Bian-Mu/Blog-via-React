@@ -1,13 +1,18 @@
+import { useState } from "react";
 import "./Diary.css"
+import TimeButton from "./timebutton/timebutton";
 function Diary() {
+    const [calendar, SetCalendar] = useState(false);
     return (
         <>
-            <div id="time-button"><button name="选择日期">
-                <mark>
-                    re-DAYs
-                </mark>
-            </button>
+            <div id="time-button">
+                <button name="选择日期" onClick={() => SetCalendar(!calendar)}>
+                    <mark>
+                        re-DAYs
+                    </mark>
+                </button>
             </div>
+            {calendar && <TimeButton />}
             <h1 id="date">123456789</h1>
             <div id="main-content">
                 <p id="content">

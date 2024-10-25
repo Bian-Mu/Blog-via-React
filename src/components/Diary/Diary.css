@@ -9,11 +9,6 @@
  }
 
  div[id='time-button'] {
-     /* margin-top: 4vh;
-    margin-right: 2vw;
-    margin-bottom: -1vh;
-    display: flex;
-    justify-content: right; */
      position: absolute;
      top: 21vh;
      right: 8vw;
