@@ -1,10 +1,10 @@
 import "./SelfIntro.css"
 import avatar from "../../../assets/image/avatar.jpg"
-
 const contact_list = [
     {
         target: "Github",
-        src: "https://github.com/Bian-Mu"
+        src: "https://github.com/Bian-Mu",
+        id: "github"
     },
     // {
     //     target: "email",
@@ -12,7 +12,8 @@ const contact_list = [
     // },
     {
         target: "Telegram",
-        src: "https://t.me/Jiang_Yang"
+        src: "https://t.me/Jiang_Yang",
+        id: "telegram"
     }
 ]
 function SelfIntro() {
@@ -25,8 +26,8 @@ function SelfIntro() {
                 <span>To contact:</span>
                 <hr />
                 <ul id="contact-list">
-                    {contact_list.map((item, index) => {
-                        return <p><li key={index}><a href={item.src}>{item.target}</a></li></p>
+                    {contact_list.map((item) => {
+                        return <p key={item.id}><li><a href={item.src}>{item.target}</a></li></p>
                     })}
                 </ul>
             </div>

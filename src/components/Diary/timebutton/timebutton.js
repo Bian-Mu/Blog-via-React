@@ -1,7 +1,7 @@
 import "./timebutton.css"
 import { useDispatch, useSelector } from "react-redux"
 import { increment, decrement } from "../../../store/modules/calendar"
-
+import { useMd } from "../../../context/diarymd"
 function MonthList() {
     const dispatch = useDispatch()
     const { month } = useSelector(state => state.calendar)
@@ -15,6 +15,7 @@ function MonthList() {
 }
 
 function Everyday({ date }) {
+
     return (
         <li>
             <button className="everyday">
@@ -23,6 +24,7 @@ function Everyday({ date }) {
         </li>
     )
 }
+
 function DaysList() {
     const { month } = useSelector(state => state.calendar)
     let daysInMonth = new Date(2024, month, 0).getDate();
@@ -32,7 +34,7 @@ function DaysList() {
         <>
             <ul id="daysDisplay">
                 {daysArray.map((item) => {
-                    return <Everyday date={item} />
+                    return <Everyday date={item} key={month.toString() + item.toString()} />
                 })}
                 <Everyday date={"～"} />
             </ul>
