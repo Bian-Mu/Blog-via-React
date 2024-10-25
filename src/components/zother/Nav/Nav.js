@@ -51,7 +51,7 @@ function Nav() {
     }
     return (
         <>
-            <div id="logo">Border/Collie</div>
+            <div id="logo">BRDR-CLL</div>
             <header>
                 <nav>
                     <ul>

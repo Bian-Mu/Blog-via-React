@@ -1,0 +1,124 @@
+ h1 {
+     font-weight: 520;
+     font-size: 38px;
+     display: inline-block;
+     margin-top: 3vh;
+     margin-bottom: -5%;
+     padding: 1%;
+     padding-bottom: 0%;
+ }
+
+ div[id='time-button'] {
+     /* margin-top: 4vh;
+    margin-right: 2vw;
+    margin-bottom: -1vh;
+    display: flex;
+    justify-content: right; */
+     position: absolute;
+     top: 21vh;
+     right: 8vw;
+ }
+
+ #time-button>button:hover {
+     background-color: white;
+ }
+
+ #time-button>button {
+     border: 0px;
+     border-radius: 5cm;
+     padding: 5px 8px 5px 8px;
+ }
+
+ #time-button>button>mark {
+     color: rgba(110, 117, 255, 0.5);
+     font-size: 18px;
+     background: transparent;
+ }
+
+ form {
+     display: inline;
+ }
+
+ #to-comment {
+     width: 65%;
+     height: 10%;
+     border: solid grey 2px;
+     border-radius: 0.2cm;
+     overflow-y: auto;
+     margin-top: 0.5%;
+     padding-top: 0;
+     padding-left: 0.5%;
+ }
+
+ #to-comment:focus {
+     border: solid rgb(255, 255, 255) 2px;
+     outline: none;
+ }
+
+
+ article div[id='main-content'] {
+     display: block;
+     margin-top: 1%;
+     margin-bottom: 1%;
+     height: 60%;
+     overflow-y: auto;
+     overflow-x: hidden;
+     padding: 1%;
+     padding-right: 2.5%;
+     padding-top: 0%;
+ }
+
+ #handout {
+     color: rgba(8, 189, 255, 0.5);
+     border-color: white;
+     margin-left: 1%;
+ }
+
+
+ @keyframes shake {
+
+     0%,
+     100% {
+         transform: rotate(-15deg) translateX(0);
+     }
+
+     10%,
+     30%,
+     50%,
+     70%,
+     90% {
+         transform: rotate(-15deg) translateX(-5px);
+     }
+
+     20%,
+     40%,
+     60%,
+     80% {
+         transform: rotate(-15deg) translateX(5px);
+     }
+ }
+
+
+ #logo2 {
+     display: inline-block;
+     margin-left: 5vw;
+     font-size: 38px;
+     font-weight: 520;
+
+     background: url(../../assets/image/avatar.jpg) no-repeat center;
+     background-size: 300% 675%;
+     -webkit-background-clip: text;
+     background-clip: text;
+     -webkit-text-fill-color: transparent;
+     mix-blend-mode: multiply;
+
+
+     transform: rotate(-15deg);
+     transform-origin: center;
+
+     transition: transform 1s;
+ }
+
+ #logo2:hover {
+     animation: shake 0.3s infinite;
+ }
