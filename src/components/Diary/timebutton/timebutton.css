@@ -31,8 +31,9 @@
 }
 
 #monthDisplay {
-    display: inline;
+    transform: translateY(25%);
     width: 100px;
+    text-align: center;
     margin-bottom: 0;
 }
 

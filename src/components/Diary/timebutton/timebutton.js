@@ -27,16 +27,14 @@ function Everyday({ date }) {
         }
         else {
             const fetchData = async () => {
-                const url = `../../../../public/2024/${month}-${date}.md`;
+                const url = `http://localhost:4000/public/md2024/${month}-${date}.md`;
                 try {
                     const response = await fetch(url);
                     if (response.ok) {
                         SetAvailable(true)
-                        console.log(response)
                     }
                     else {
                         SetAvailable(false)
-                        console.log("false")
                     }
                 } catch (error) {
                     console.error("Error fetching data: ", error)
