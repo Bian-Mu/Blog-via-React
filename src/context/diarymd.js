@@ -1,10 +1,14 @@
-import { createContext, useState, useContext } from "react";
-
+import { createContext, useState, useContext, useEffect } from "react";
+import { useSelector } from "react-redux";
 const MdContext = createContext();
 
+
 export function MdProvider({ children }) {
-    const [title, SetTitle] = useState("")
-    const [text, SetText] = useState("")
+    let today = new Date();
+    const { month } = useSelector(state => state.calendar)
+    let time = `2024/${month}/${today.getDate()}`;
+    const [title, SetTitle] = useState(time)
+    const [text, SetText] = useState("Temporarily blank")
     function updateTitle(newtitle) {
         SetTitle(newtitle)
     }
@@ -12,7 +16,21 @@ export function MdProvider({ children }) {
     function updateText(newtext) {
         SetText(newtext)
     }
+    //组件挂载后通过钩子异步获取数据
+    useEffect(() => {
+        async function initialGetMd() {
 
+            const url = `http://localhost:4000/public/2024md/${month}-${today.getDate()}.md`;
+            try {
+                const response = await fetch(url);
+                const initialText = await response.text();
+                SetText(initialText);
+            } catch (error) {
+                SetText("## Temporarily blank");
+            }
+        }
+        initialGetMd();
+    }, []);
     return (
         <MdContext.Provider value={{ title, text, updateTitle, updateText }}>
             {children}
@@ -21,5 +39,5 @@ export function MdProvider({ children }) {
 }
 
 export const useMd = () => {
-    useContext(MdContext)
+    return useContext(MdContext)
 }

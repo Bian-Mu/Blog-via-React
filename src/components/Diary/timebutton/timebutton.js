@@ -20,6 +20,19 @@ function MonthList() {
 function Everyday({ date }) {
     const { month } = useSelector(state => state.calendar)
     const [available, SetAvailable] = useState(false)
+    const { updateTitle, updateText } = useMd()
+
+    async function getMd() {
+        const url = `http://localhost:4000/public/2024md/${month}-${date}.md`;
+        try {
+            const response = await fetch(url);
+            updateTitle(`2024/${month}/${date}`)
+            updateText(await response.text())
+
+        } catch (error) {
+            console.error("Error fetching data: ", error)
+        }
+    }
 
     useEffect(() => {
         if (date === "～") {
@@ -27,10 +40,10 @@ function Everyday({ date }) {
         }
         else {
             const fetchData = async () => {
-                const url = `http://localhost:4000/public/md2024/${month}-${date}.md`;
+                const url = `http://localhost:4000/public/2024md/${month}-${date}.md`;
                 try {
                     const response = await fetch(url);
-                    if (response.ok) {
+                    if (response.status !== 201) { //文件不存在
                         SetAvailable(true)
                     }
                     else {
@@ -47,7 +60,7 @@ function Everyday({ date }) {
 
     if (available) {
         return (<li>
-            <button className="haveagoodday">
+            <button className="haveagoodday" onClick={() => getMd()}>
                 {date}
             </button>
         </li>)

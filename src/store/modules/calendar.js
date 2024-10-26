@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
 
+let today = new Date()
 
 const calendarStore = createSlice({
     name: "calendar",
     initialState: {
-        month: 1
+        month: today.getMonth() + 1
     },
     reducers: {
         increment(state) {
