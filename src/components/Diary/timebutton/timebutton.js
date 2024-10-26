@@ -2,6 +2,9 @@ import "./timebutton.css"
 import { useDispatch, useSelector } from "react-redux"
 import { increment, decrement } from "../../../store/modules/calendar"
 import { useMd } from "../../../context/diarymd"
+import { useEffect, useState } from "react"
+
+
 function MonthList() {
     const dispatch = useDispatch()
     const { month } = useSelector(state => state.calendar)
@@ -15,10 +18,45 @@ function MonthList() {
 }
 
 function Everyday({ date }) {
+    const { month } = useSelector(state => state.calendar)
+    const [available, SetAvailable] = useState(false)
 
+    useEffect(() => {
+        if (date === "～") {
+            SetAvailable(false)
+        }
+        else {
+            const fetchData = async () => {
+                const url = `../../../../public/2024/${month}-${date}.md`;
+                try {
+                    const response = await fetch(url);
+                    if (response.ok) {
+                        SetAvailable(true)
+                        console.log(response)
+                    }
+                    else {
+                        SetAvailable(false)
+                        console.log("false")
+                    }
+                } catch (error) {
+                    console.error("Error fetching data: ", error)
+                    SetAvailable(false);
+                }
+            }
+            fetchData()
+        }
+    }, [date, month])
+
+    if (available) {
+        return (<li>
+            <button className="haveagoodday">
+                {date}
+            </button>
+        </li>)
+    }
     return (
         <li>
-            <button className="everyday">
+            <button className="everyday" disabled>
                 {date}
             </button>
         </li>
@@ -34,7 +72,7 @@ function DaysList() {
         <>
             <ul id="daysDisplay">
                 {daysArray.map((item) => {
-                    return <Everyday date={item} key={month.toString() + item.toString()} />
+                    return <Everyday date={item} key={month.toString() + "/" + item.toString()} />
                 })}
                 <Everyday date={"～"} />
             </ul>
