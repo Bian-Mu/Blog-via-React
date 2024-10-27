@@ -2,7 +2,7 @@
     padding-top: 2%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 10px;
+    grid-gap: 0.56rem;
     counter-reset: imgNumber;
 }
 
@@ -13,8 +13,8 @@ form {
 #to-comment {
     width: 65%;
     height: 10%;
-    border: solid grey 2px;
-    border-radius: 0.2cm;
+    border: solid grey 0.12rem;
+    border-radius: 0.4rem;
     overflow-y: auto;
     margin-top: 0.5%;
     padding-top: 0;
@@ -22,7 +22,7 @@ form {
 }
 
 #to-comment:focus {
-    border: solid rgb(255, 255, 255) 2px;
+    border: solid rgb(255, 255, 255) 0.12rem;
     outline: none;
 }
 
@@ -31,7 +31,7 @@ article div[id='main-content-draw'] {
     display: block;
     margin-top: 1%;
     margin-bottom: 1%;
-    height: 72%;
+    height: 73.6%;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 1%;
@@ -70,7 +70,7 @@ article div[id='main-content-draw'] {
 #logo2 {
     display: inline-block;
     margin-left: 5vw;
-    font-size: 38px;
+    font-size: 2.11rem;
     font-weight: 520;
 
     background: url(../../assets/image/emmm.jpg) no-repeat center;
@@ -94,12 +94,12 @@ article div[id='main-content-draw'] {
 
 .imgBox {
     position: relative;
-    height: 200px;
+    height: 11.1rem;
 }
 
 
 .imgBox img {
-    border: 2px solid white;
+    border: 0.12rem solid white;
     height: 100%;
     width: 100%;
     object-fit: cover;
@@ -109,13 +109,13 @@ article div[id='main-content-draw'] {
     content: counter(imgNumber);
     counter-increment: imgNumber;
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     left: 50%;
     /* 相对自身左移50% */
     transform: translateX(-50%);
     background: rgb(88, 88, 88);
     border-radius: 15%;
     color: white;
-    padding: 2px 5px;
-    font-size: 14px;
+    padding: 0.1rem 0.25rem;
+    font-size: 0.778rem;
 }

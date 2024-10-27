@@ -1,6 +1,6 @@
  h1 {
      font-weight: 520;
-     font-size: 42px;
+     font-size: 2.3rem;
      display: inline-block;
      margin-top: 3vh;
      margin-bottom: -5%;
@@ -19,14 +19,14 @@
  }
 
  #time-button>button {
-     border: 0px;
-     border-radius: 5cm;
-     padding: 5px 8px 5px 8px;
+     border: 0;
+     border-radius: 1rem;
+     padding: 0.3rem 0.5rem 0.3rem 0.5rem;
  }
 
  #time-button>button>mark {
      color: rgba(110, 117, 255, 0.5);
-     font-size: 18px;
+     font-size: 1rem;
      background: transparent;
  }
 
@@ -37,8 +37,8 @@
  #to-comment {
      width: 65%;
      height: 10%;
-     border: solid grey 2px;
-     border-radius: 0.2cm;
+     border: solid grey 0.1rem;
+     border-radius: 0.8rem;
      overflow-y: auto;
      margin-top: 0.5%;
      padding-top: 0;
@@ -46,7 +46,7 @@
  }
 
  #to-comment:focus {
-     border: solid rgb(255, 255, 255) 2px;
+     border: solid rgb(255, 255, 255) 0.rem;
      outline: none;
  }
 
@@ -97,7 +97,7 @@
  #logo2 {
      display: inline-block;
      margin-left: 5vw;
-     font-size: 38px;
+     font-size: 1.9rem;
      font-weight: 520;
 
      background: url(../../assets/image/emmm.jpg) no-repeat center;

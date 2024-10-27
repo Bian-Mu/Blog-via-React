@@ -12,8 +12,8 @@ article {
     height: 75vh;
     margin-left: 1vw;
     vertical-align: top;
-    border: 3px dashed white;
-    border-radius: 2%;
+    border: 0.15rem dashed white;
+    border-radius: 3.5%;
     padding-left: 3%;
     padding-right: 1.5%;
 

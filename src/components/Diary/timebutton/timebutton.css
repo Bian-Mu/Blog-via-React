@@ -2,12 +2,12 @@
     position: absolute;
     top: 25vh;
     right: 8vw;
-    width: 250px;
-    height: 220px;
+    width: 14rem;
+    height: 12.2rem;
     background-color: rgb(255, 255, 220);
-    border: 3px solid rgb(255, 220, 187);
-    border-radius: 0.3cm;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    border: 0.17rem solid rgb(255, 220, 187);
+    border-radius: 0.6rem;
+    box-shadow: 0 0.22rem 0.66rem rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -18,21 +18,21 @@
 #month {
     display: flex;
     justify-content: center;
-    margin: -15px 0 10px 0;
+    margin: -0.83rem 0 0.5rem 0;
 }
 
 .monthConvert {
-    margin-top: 15px;
-    height: 30px;
+    margin-top: 0.83rem;
+    height: 1.66rem;
     border: none;
     color: orange;
     background-color: rgb(255, 255, 220);
-    border-radius: 0.3cm;
+    border-radius: 0.5rem;
 }
 
 #monthDisplay {
     transform: translateY(40%);
-    width: 100px;
+    width: 5.56rem;
     text-align: center;
     margin-bottom: 0;
     margin-top: 0;
@@ -46,7 +46,7 @@
     grid-template-columns: repeat(7, 1fr);
     gap: 0;
     overflow-y: auto;
-    height: 140px;
+    height: 7.78rem;
 }
 
 .everyday {
