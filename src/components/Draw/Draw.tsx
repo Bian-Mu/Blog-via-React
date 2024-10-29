@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./Draw.css"
+import React from "react";
 
 const topics = ["doggie"]
 

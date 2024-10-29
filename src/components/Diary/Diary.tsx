@@ -4,6 +4,7 @@ import TimeButton from "./timebutton/timebutton";
 import { MdProvider } from "../../context/diarymd"
 import { useMd } from "../../context/diarymd";
 import { marked } from "marked"
+import React from "react";
 function Diary() {
     return (
         <MdProvider>
