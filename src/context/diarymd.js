@@ -23,10 +23,14 @@ export function MdProvider({ children }) {
             const url = `http://localhost:4000/public/2024md/${month}-${today.getDate()}.md`;
             try {
                 const response = await fetch(url);
-                const initialText = await response.text();
-                SetText(initialText);
+                if (response.status !== 201) {
+                    const initialText = await response.text();
+                    SetText(initialText);
+                } else {
+                    SetText("### Temporarily blank");
+                }
             } catch (error) {
-                SetText("## Temporarily blank");
+                SetText("### Temporarily blank");
             }
         }
         initialGetMd();
