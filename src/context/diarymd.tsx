@@ -1,7 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
 import React from "react"
-const MdContext = createContext();
+const MdContext = createContext(undefined);
 
 
 export function MdProvider({ children }) {
@@ -10,11 +10,11 @@ export function MdProvider({ children }) {
     let time = `2024/${month}/${today.getDate()}`;
     const [title, SetTitle] = useState(time)
     const [text, SetText] = useState("Temporarily blank")
-    function updateTitle(newtitle) {
+    function updateTitle(newtitle: string) {
         SetTitle(newtitle)
     }
 
-    function updateText(newtext) {
+    function updateText(newtext: string) {
         SetText(newtext)
     }
     //组件挂载后通过钩子异步获取数据
