@@ -6,9 +6,10 @@ import { useEffect, useState } from "react"
 import React from "react"
 
 
-function MonthList() {
+const MonthList: React.FC = () => {
     const dispatch = useDispatch()
-    const { month } = useSelector(state => state.calendar)
+    const { month } = useSelector((state: { calendar: { month: number } }) => state.calendar)
+
     return (
         <>
             <button className="monthConvert" onClick={() => dispatch(decrement())}>&lt;&lt;</button>
@@ -17,9 +18,11 @@ function MonthList() {
         </>
     )
 }
-
-function Everyday({ date }) {
-    const { month } = useSelector(state => state.calendar)
+interface EverydayProps {
+    date: string | number
+}
+const Everyday: React.FC<EverydayProps> = ({ date }) => {
+    const { month } = useSelector((state: { calendar: { month: number } }) => state.calendar)
     const [available, SetAvailable] = useState(false)
     const { updateTitle, updateText } = useMd()
 
@@ -76,7 +79,8 @@ function Everyday({ date }) {
 }
 
 function DaysList() {
-    const { month } = useSelector(state => state.calendar)
+    const { month } = useSelector((state: { calendar: { month: number } }) => state.calendar)
+
     let daysInMonth = new Date(2024, month, 0).getDate();
     let daysArray = Array.from({ length: daysInMonth }, (x, i) => i + 1)
 

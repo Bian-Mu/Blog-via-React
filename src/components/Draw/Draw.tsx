@@ -4,10 +4,15 @@ import React from "react";
 
 const topics = ["doggie"]
 
+interface Pic {
+    src: string;
+    id: string;
+}
+
 function Draw() {
-    const [pics, SetPics] = useState([]);
+    const [pics, SetPics] = useState<Pic[]>([]);
     useEffect(() => {
-        const newPic = []
+        const newPic: Pic[] = []
         const loadPic = async () => {
             for (let topicIndex = 0; topicIndex < topics.length; topicIndex++) {
                 const topic = topics[topicIndex];

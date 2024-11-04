@@ -5,7 +5,7 @@ let today = new Date()
 const calendarStore = createSlice({
     name: "calendar",
     initialState: {
-        month: today.getMonth() + 1
+        month: today.getMonth() + 1 as number
     },
     reducers: {
         increment(state) {
