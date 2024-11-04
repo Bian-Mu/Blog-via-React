@@ -4,6 +4,7 @@ import { increment, decrement } from "../../../store/modules/calendar"
 import { useMd } from "../../../context/diarymd"
 import { useEffect, useState } from "react"
 import React from "react"
+import { useQuery } from "react-query"
 
 
 const MonthList: React.FC = () => {
@@ -37,30 +38,48 @@ const Everyday: React.FC<EverydayProps> = ({ date }) => {
             console.error("Error fetching data: ", error)
         }
     }
-
-    useEffect(() => {
-        if (date === "～") {
-            SetAvailable(false)
-        }
-        else {
-            const fetchData = async () => {
-                const url = `http://localhost:4000/public/2024md/${month}-${date}.md`;
-                try {
-                    const response = await fetch(url);
-                    if (response.status !== 201) { //文件不存在
-                        SetAvailable(true)
-                    }
-                    else {
-                        SetAvailable(false)
-                    }
-                } catch (error) {
-                    console.error("Error fetching data: ", error)
-                    SetAvailable(false);
-                }
+    const { data: isAvailable, isLoading, isError } = useQuery([month, date],
+        async () => {
+            const url = `http://localhost:4000/public/2024md/${month}-${date}.md`;
+            const response = await fetch(url);
+            let initialData = "## Temporarily blank"
+            if (response.status !== 201) {
+                return true
             }
-            fetchData()
+        },
+        {
+            onError: () => SetAvailable(false),
+            initialData: false
         }
-    }, [date, month])
+    )
+    useEffect(() => {
+        if (!isLoading && !isError) {
+            SetAvailable(isAvailable || false);
+        }
+    }, [isAvailable, isLoading, isError]);
+    // useEffect(() => {
+    //     if (date === "～") {
+    //         SetAvailable(false)
+    //     }
+    //     else {
+    //         const fetchData = async () => {
+    //             const url = `http://localhost:4000/public/2024md/${month}-${date}.md`;
+    //             try {
+    //                 const response = await fetch(url);
+    //                 if (response.status !== 201) { //文件不存在
+    //                     SetAvailable(true)
+    //                 }
+    //                 else {
+    //                     SetAvailable(false)
+    //                 }
+    //             } catch (error) {
+    //                 console.error("Error fetching data: ", error)
+    //                 SetAvailable(false);
+    //             }
+    //         }
+    //         fetchData()
+    //     }
+    // }, [date, month])
 
     if (available) {
         return (<li>
