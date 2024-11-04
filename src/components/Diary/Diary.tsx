@@ -29,7 +29,7 @@ function DiaryContent() {
             {calendar && <TimeButton />}
             <h1 id="date">{title}</h1>
             <div id="main-content">
-                <p id="content" dangerouslySetInnerHTML={{ __html: marked(text) }}>
+                <p id="content" dangerouslySetInnerHTML={{ __html: (marked(text) as string) }}>
                 </p>
             </div>
             <hr />

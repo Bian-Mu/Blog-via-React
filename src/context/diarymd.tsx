@@ -1,20 +1,31 @@
-import { createContext, useState, useContext, useEffect } from "react";
+import { ReactNode, createContext, useState, useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
 import React from "react"
-const MdContext = createContext();
+
+interface MdContextType {
+    title: string;
+    text: string;
+    updateTitle: (newtitle: string) => void;
+    updateText: (newtext: string) => void
+}
+
+interface MdProviderProps {
+    children: ReactNode;
+}
+const MdContext = createContext<MdContextType | undefined>(undefined);
 
 
-export function MdProvider({ children }) {
+export function MdProvider({ children }: MdProviderProps) {
     let today = new Date();
-    const { month } = useSelector(state => state.calendar)
+    const { month } = useSelector((state: { calendar: { month: number } }) => state.calendar)
     let time = `2024/${month}/${today.getDate()}`;
     const [title, SetTitle] = useState(time)
     const [text, SetText] = useState("Temporarily blank")
-    function updateTitle(newtitle) {
+    function updateTitle(newtitle: string) {
         SetTitle(newtitle)
     }
 
-    function updateText(newtext) {
+    function updateText(newtext: string) {
         SetText(newtext)
     }
     //组件挂载后通过钩子异步获取数据
@@ -39,6 +50,6 @@ export function MdProvider({ children }) {
     )
 }
 
-export const useMd = () => {
-    return useContext(MdContext)
+export const useMd = (): MdContextType => {
+    return useContext(MdContext) as MdContextType;
 }

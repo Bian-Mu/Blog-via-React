@@ -5,7 +5,8 @@ import Novel from "../../Novel/Novel";
 import Song from "../../Song/Song";
 
 import "./Nav.css"
-import { useState } from "react";
+import { useState, ReactNode } from "react";
+import React from "react";
 
 const nav_list = [
     {
@@ -33,7 +34,20 @@ const nav_list = [
         id: 4
     }
 ]
-function NavButton({ item, children, className, convert }) {
+interface item {
+    path: string;
+    element: React.JSX.Element
+    titile: string;
+    id: number
+}
+interface NavButtonProps {
+    item: item;
+    children: ReactNode;
+    className: string;
+    convert: Function
+}
+
+function NavButton({ item, children, className, convert }: NavButtonProps) {
     const navigate = useNavigate();
     return (
         <button className={className}
@@ -46,7 +60,7 @@ function NavButton({ item, children, className, convert }) {
 
 function Nav() {
     const [selected, SetSelected] = useState(1);
-    function convert(index) {
+    function convert(index: number) {
         SetSelected(index)
     }
     return (
