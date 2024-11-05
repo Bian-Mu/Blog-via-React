@@ -1,7 +1,6 @@
 import { ReactNode, createContext, useState, useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
 import React from "react"
-import { useQuery } from "react-query"
 interface MdContextType {
     title: string;
     text: string;
@@ -19,8 +18,9 @@ export function MdProvider({ children }: MdProviderProps) {
     let today = new Date();
     const { month } = useSelector((state: { calendar: { month: number } }) => state.calendar)
     let time = `2024/${month}/${today.getDate()}`;
+
     const [title, SetTitle] = useState(time)
-    const [text, SetText] = useState("Temporarily blank")
+    const [text, SetText] = useState("## Temporarily blank")
     function updateTitle(newtitle: string) {
         SetTitle(newtitle)
     }
@@ -28,41 +28,25 @@ export function MdProvider({ children }: MdProviderProps) {
     function updateText(newtext: string) {
         SetText(newtext)
     }
-    const { data: initialText, isLoading, isError } = useQuery([month, today.getDate()],
-        async () => {
-            const url = `http://localhost:4000/public/2024md/${month}-${today.getDate()}.md`;
-            const response = await fetch(url);
-            let initialData = "## Temporarily blank"
-            if (response.status !== 201) {
-                initialData = await response.text();
-            }
-            return initialData
-        },
-        {
-            onError: () => SetText("## Temporarily blank"),
-            initialData: "## Temporarily blank"
-        }
-    )
-    useEffect(() => {
-        if (!isLoading && !isError) {
-            SetText(initialText || "## Temporarily blank");
-        }
-    }, [initialText, isLoading, isError]);
-    // //组件挂载后通过钩子异步获取数据
-    // useEffect(() => {
-    //     async function initialGetMd() {
 
-    //         const url = `http://localhost:4000/public/2024md/${month}-${today.getDate()}.md`;
-    //         try {
-    //             const response = await fetch(url);
-    //             const initialText = await response.text();
-    //             SetText(initialText);
-    //         } catch (error) {
-    //             SetText("## Temporarily blank");
-    //         }
-    //     }
-    //     initialGetMd();
-    // }, []);
+    // //组件挂载后通过钩子异步获取数据
+    useEffect(() => {
+        async function initialGetMd() {
+
+            const url = `http://localhost:4000/public/2024md/${month}-${today.getDate()}.md`;
+            try {
+                const response = await fetch(url);
+                if (response.status !== 201) {
+                    const initialText = await response.text();
+                    SetText(initialText);
+                }
+
+            } catch (error) {
+                SetText("## Temporarily blank");
+            }
+        }
+        initialGetMd();
+    }, []);
     return (
         <MdContext.Provider value={{ title, text, updateTitle, updateText }}>
             {children}

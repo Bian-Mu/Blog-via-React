@@ -5,6 +5,9 @@ import { MdProvider } from "../../context/diarymd"
 import { useMd } from "../../context/diarymd";
 import { marked } from "marked"
 import React from "react";
+import Comment from "../zother/Comments/Comment";
+
+
 function Diary() {
     return (
         <MdProvider>
@@ -33,11 +36,7 @@ function DiaryContent() {
                 </p>
             </div>
             <hr />
-            <form action="" method="">
-                <textarea name="comment" id="to-comment" placeholder="对小狗善良一些！"></textarea>
-                <button id='handout' type="submit">Push</button>
-            </form>
-            <div id="logo2">ฅ边.牧ฅノ</div>
+            <Comment />
         </>
     );
 }

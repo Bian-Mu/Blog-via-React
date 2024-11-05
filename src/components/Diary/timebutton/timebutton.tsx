@@ -42,7 +42,6 @@ const Everyday: React.FC<EverydayProps> = ({ date }) => {
         async () => {
             const url = `http://localhost:4000/public/2024md/${month}-${date}.md`;
             const response = await fetch(url);
-            let initialData = "## Temporarily blank"
             if (response.status !== 201) {
                 return true
             }
@@ -53,8 +52,8 @@ const Everyday: React.FC<EverydayProps> = ({ date }) => {
         }
     )
     useEffect(() => {
-        if (!isLoading && !isError) {
-            SetAvailable(isAvailable || false);
+        if (!isLoading && !isError && typeof isAvailable === "boolean") {
+            SetAvailable(isAvailable);
         }
     }, [isAvailable, isLoading, isError]);
     // useEffect(() => {

@@ -3,6 +3,7 @@ aside {
 }
 
 aside {
+    min-height: 60vh;
     display: inline-block;
     width: 13vw;
     height: 60vh;

@@ -12,32 +12,32 @@ const nav_list = [
     {
         path: "/diary",
         element: <Diary />,
-        titile: "小狗日记",
+        title: "小狗日记",
         id: 1
     },
     {
         path: "/draw",
         element: <Draw />,
-        titile: "画一幅画",
+        title: "画一幅画",
         id: 2
     },
     {
         path: "/novel",
         element: <Novel />,
-        titile: "写本小说",
+        title: "写本小说",
         id: 3
     },
     {
         path: "/song",
         element: <Song />,
-        titile: "唱一首歌",
+        title: "唱一首歌",
         id: 4
     }
 ]
 interface item {
     path: string;
     element: React.JSX.Element
-    titile: string;
+    title: string;
     id: number
 }
 interface NavButtonProps {
@@ -65,7 +65,7 @@ function Nav() {
     }
     return (
         <>
-            <div id="logo">BRDR-CLL</div>
+            <div id="logo">BiAN_Mu</div>
             <header>
                 <nav>
                     <ul>
@@ -75,7 +75,7 @@ function Nav() {
                                     <NavButton item={item}
                                         convert={convert}
                                         className={(selected === item.id) ? "active" : ""}>
-                                        {item.titile}
+                                        {item.title}
                                     </NavButton>
                                 </li>
                             )

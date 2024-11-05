@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import "./Draw.css"
 import React from "react";
 import { useQuery } from "react-query";
-
+import Comment from "../zother/Comments/Comment"
 const topics = ["doggie"]
 
 interface Pic {
@@ -70,17 +70,13 @@ function Draw() {
                 <div id="content-draw">
                     {pics.map(pic => (
                         <div key={pic.id} className="imgBox">
-                            <img src={pic.src} />
+                            <img src={pic.src} alt={`${pic.src}+${pic.id}`} />
                         </div>
                     ))}
                 </div>
             </div>
             <hr />
-            <form action="" method="">
-                <textarea name="comment" id="to-comment" placeholder="对小狗善良一些！"></textarea>
-                <button id='handout' type="submit">Push</button>
-            </form>
-            <div id="logo2">ฅ边.牧ฅノ</div>
+            <Comment />
         </>
     )
 }
