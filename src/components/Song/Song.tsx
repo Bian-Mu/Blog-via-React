@@ -1,6 +1,6 @@
 import React from "react"
 
-// 本功能计划使用网易云api
+// 本功能使用网易云api
 
 async function songInfoGet(songId: number) {
     const songUrl = `http://localhost:4000/api/songInfo?songId=${songId}`;
