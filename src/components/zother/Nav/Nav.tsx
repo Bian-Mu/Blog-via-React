@@ -1,11 +1,11 @@
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import Diary from "../../Diary/Diary";
 import Draw from "../../Draw/Draw";
 import Novel from "../../Novel/Novel";
 import Song from "../../Song/Song";
 
 import "./Nav.css"
-import { useState, ReactNode } from "react";
+import { useState, ReactNode, useEffect } from "react";
 import React from "react";
 import { reset } from "../../../store/modules/calendar"
 import { useDispatch } from "react-redux"
@@ -52,21 +52,34 @@ interface NavButtonProps {
 function NavButton({ item, children, className, convert }: NavButtonProps) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    function navButtonClick(item: item) {
+        navigate(item.path)
+        convert(item.id)
+        dispatch(reset())
+    }
+
     return (
         <button className={className}
             onClick={() => {
-                navigate(item.path)
-                convert(item.id)
-                dispatch(reset())
+                navButtonClick(item)
             }}>{children}</button>
     )
 }
 
 function Nav() {
     const [selected, SetSelected] = useState(1);
+    const nowlocation = useLocation();
     function convert(index: number) {
         SetSelected(index)
     }
+
+    useEffect(() => {
+        const currentNav = nav_list.find(item => item.path === nowlocation.pathname);
+        if (currentNav) {
+            SetSelected(currentNav.id);
+        }
+    }, [nowlocation.pathname]);
+
     return (
         <>
             <div id="logo">BiAN_Mu</div>
