@@ -12,7 +12,6 @@ function App() {
         <article>
           <Outlet />
         </article>
-
       </main>
     </div>
   );

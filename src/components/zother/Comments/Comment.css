@@ -24,26 +24,6 @@ form {
 }
 
 
-form {
-    display: inline;
-}
-
-#to-comment {
-    width: 65%;
-    height: 10%;
-    border: solid grey 0.1rem;
-    border-radius: 0.8rem;
-    overflow-y: auto;
-    margin-top: 0.5%;
-    padding-top: 0;
-    padding-left: 0.5%;
-}
-
-#to-comment:focus {
-    border: solid rgb(255, 255, 255) 0.rem;
-    outline: none;
-}
-
 
 @keyframes shake {
 
@@ -68,7 +48,7 @@ form {
     }
 }
 
-@media (max-width:1314px) {
+/* @media (max-width:1314px) {
     form+#logo2 {
         display: none;
     }
@@ -78,11 +58,11 @@ form {
     form+#logo2 {
         display: none;
     }
-}
+} */
 
 #logo2 {
     display: inline-block;
-    margin-left: 5vw;
+    margin-left: 80px;
     font-size: 2.11rem;
     font-weight: 520;
 

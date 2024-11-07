@@ -1,3 +1,10 @@
+#nav-content {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 1500px;
+}
+
+
 nav {
     background-color: rgba(244, 202, 231, 0.5);
 }
@@ -7,15 +14,13 @@ ul {
 }
 
 header {
-    display: inline-block;
-    width: 72vw;
+    width: 1200px;
 }
 
 nav {
-    width: 75vw;
-    height: 8vh;
-    margin-left: -1.5vw;
-    margin-bottom: 3vh;
+    width: 1160px;
+    height: 62px;
+    margin-bottom: 27px;
     border-radius: 1.41rem;
 }
 
@@ -49,10 +54,8 @@ nav button:hover {
 
 #logo {
     font-size: 2rem;
-    display: inline-block;
-    width: 20vw;
-    margin-bottom: 4vh;
-    margin-left: 3.5vw;
+    width: 310px;
+    margin: 20px 120px 40px 75px;
 
     background: url(../../../assets/image/emmm.jpg) no-repeat center;
     background-size: 300% 675%;

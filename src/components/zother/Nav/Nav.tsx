@@ -81,7 +81,7 @@ function Nav() {
     }, [nowlocation.pathname]);
 
     return (
-        <>
+        <div id="nav-content">
             <div id="logo">BiAN_Mu</div>
             <header>
                 <nav>
@@ -100,7 +100,7 @@ function Nav() {
                     </ul>
                 </nav>
             </header>
-        </>
+        </div>
     )
 }
 

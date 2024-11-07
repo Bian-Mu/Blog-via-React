@@ -1,5 +1,7 @@
 main {
-    display: block;
+    display: flex;
+    flex-wrap: nowrap;
+    width: 1500px;
 }
 
 article {
@@ -8,9 +10,9 @@ article {
 
 article {
     display: inline-block;
-    width: 70vw;
-    height: 75vh;
-    margin-left: 1vw;
+    width: 1080px;
+    height: 650px;
+    margin-left: 18px;
     vertical-align: top;
     border: 0.15rem dashed white;
     border-radius: 3.5%;
