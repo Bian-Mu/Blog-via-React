@@ -4,10 +4,10 @@ aside {
 
 aside {
     display: inline-block;
-    width: 210px;
-    height: 520px;
+    width: 260px;
+    height: 540px;
     margin-left: 50px;
-    margin-right: 75px;
+    margin-right: 80px;
     border-radius: 1.4rem;
     box-shadow:
         0 4px 8px rgba(0, 0, 0, 0.15),
@@ -24,9 +24,9 @@ aside>div {
 
 figure {
     display: block;
-    margin-left: 52px;
+    margin-left: 60px;
     margin-top: 40px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
 }
 
 ul p:nth-of-type(2) {

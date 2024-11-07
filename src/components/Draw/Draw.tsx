@@ -12,7 +12,7 @@ interface Pic {
 
 function Draw() {
     const [pics, SetPics] = useState<Pic[]>([]);
-    const { data: initialPics, isLoading } = useQuery([topics],
+    const { data: initialPics } = useQuery([topics],
         async () => {
             let currentPic: Pic[] = []
             const newPic: Pic[] = []
@@ -36,10 +36,10 @@ function Draw() {
         }
     )
     useEffect(() => {
-        if (!isLoading && initialPics) {
+        if (initialPics) {
             SetPics([...initialPics])
         }
-    }, [initialPics, isLoading])
+    }, [initialPics])
     // useEffect(() => {
     //     const newPic: Pic[] = []
     //     const loadPic = async () => {

@@ -3,7 +3,7 @@ import "./Diary.css"
 import TimeButton from "./timebutton/timebutton";
 import { MdProvider } from "../../context/diarymd"
 import { useMd } from "../../context/diarymd";
-import { marked } from "marked"
+
 import React from "react";
 import Comment from "../zother/Comments/Comment";
 
@@ -32,7 +32,7 @@ function DiaryContent() {
             {calendar && <TimeButton />}
             <h1 id="date">{title}</h1>
             <div id="main-content">
-                <p id="content" dangerouslySetInnerHTML={{ __html: (marked(text) as string) }}>
+                <p id="content" dangerouslySetInnerHTML={{ __html: text }}>
                 </p>
             </div>
             <hr />
