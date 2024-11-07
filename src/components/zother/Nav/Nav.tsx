@@ -7,6 +7,8 @@ import Song from "../../Song/Song";
 import "./Nav.css"
 import { useState, ReactNode } from "react";
 import React from "react";
+import { reset } from "../../../store/modules/calendar"
+import { useDispatch } from "react-redux"
 
 const nav_list = [
     {
@@ -49,11 +51,13 @@ interface NavButtonProps {
 
 function NavButton({ item, children, className, convert }: NavButtonProps) {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     return (
         <button className={className}
             onClick={() => {
                 navigate(item.path)
                 convert(item.id)
+                dispatch(reset())
             }}>{children}</button>
     )
 }
