@@ -11,7 +11,7 @@
  div[id='time-button'] {
      position: absolute;
      top: 175px;
-     right: 147px;
+     left: 1310px;
  }
 
  #time-button>button:hover {
