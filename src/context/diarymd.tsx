@@ -21,7 +21,7 @@ export function MdProvider({ children }: MdProviderProps) {
     let time = `2024/${month}/${today.getDate()}`;
 
     const [title, SetTitle] = useState(time)
-    const [text, SetText] = useState("## Temporarily blank")
+    const [text, SetText] = useState(marked("## Temporarily blank") as string)
     function updateTitle(newtitle: string) {
         SetTitle(newtitle)
     }

@@ -1,40 +1,48 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { songInfoGet, songLyricsGet, songPicGet } from "./lyrics_pics/LyricsPics"
+import { useState } from "react";
+import { useQuery } from "react-query";
 
-// 本功能使用网易云api
 
-async function songInfoGet(songId: number) {
-    const songUrl = `http://localhost:4000/api/songInfo?songId=${songId}`;
-
-    try {
-        const response = await fetch(songUrl);
-        const json = await response.json();
-        const songInfo = json.songs[0].al
-        console.log(songInfo.name + songInfo.picUrl);
-    } catch (error) {
-        console.log("Error fetching data: ", error);
-    }
+interface SongInfo {
+    recordName: string,
+    picUrl: string
 }
-
-async function songLyricsGet(songId: number) {
-    const lyricsUrl = `http://localhost:4000/api/lyricsInfo?songId=${songId}`;
-
-    try {
-        const response = await fetch(lyricsUrl);
-        const json = await response.json();
-        const lyrics = json.lyric
-        console.log(lyrics);
-
-    } catch (error) {
-        console.log("Error fetching data: ", error);
-    }
-}
-
 function Song() {
-    songInfoGet(426850306)
-    songLyricsGet(426850306)
+    const [info, setInfo] = useState<SongInfo>({ recordName: "", picUrl: "" })
+    const [lyrics, setLyrics] = useState<string>("")
+    const [pic, setPic] = useState<string>("")
+    let songId = 426850306;
+
+
+    const { data: isGetInfo } = useQuery([songId],
+        async () => {
+            const songInfo = await songInfoGet(songId);
+            const songLyrics = await songLyricsGet(songId);
+
+            const songPic = await songPicGet(songInfo?.picUrl as string);
+            return [songInfo, songLyrics, songPic];
+        },
+        {
+            initialData: null
+        }
+    )
+
+    useEffect(() => {
+        if (isGetInfo !== null && typeof isGetInfo !== "undefined") {
+            setInfo(isGetInfo[0] as SongInfo)
+            setLyrics(isGetInfo[1] as string)
+            setPic(isGetInfo[2] as string)
+        }
+    }, [isGetInfo])
     return (
         <div>
-            this is song
+            {info.recordName}
+            <hr />
+            {info.picUrl}
+            <img src={pic} />
+            <hr />
+            {lyrics}
         </div>
     )
 }
