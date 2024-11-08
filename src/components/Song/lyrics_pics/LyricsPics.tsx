@@ -2,6 +2,12 @@ interface SongInfo {
     recordName: string,
     picUrl: string
 }
+interface eachSong {
+    id: number,
+    name: string,
+    singer: string,
+    path: string
+}
 // 本功能使用网易云api
 
 export async function songInfoGet(songId: number): Promise<SongInfo | null> {
@@ -49,4 +55,12 @@ export async function songPicGet(picUrl: string) {
     } catch (error) {
         console.log("Error fetching data: ", error);
     }
+}
+
+
+export async function getPlaylist(): Promise<eachSong[]> {
+    const url = `http://localhost:4000/api/playlist`
+    const response = await fetch(url)
+    const playlist = await response.json()
+    return playlist
 }
