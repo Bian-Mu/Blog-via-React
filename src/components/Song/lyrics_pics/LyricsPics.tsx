@@ -49,7 +49,7 @@ export async function songLyricsGet(songId: number): Promise<string | null> {
     return null
 }
 
-export async function songPicGet(picUrl: string) {
+export async function songPicGet(picUrl: string): Promise<string | null> {
     const url = `http://localhost:4000/api/picInfo?picUrl=${picUrl}`;
 
     try {
@@ -61,6 +61,7 @@ export async function songPicGet(picUrl: string) {
     } catch (error) {
         console.log("Error fetching data: ", error);
     }
+    return null
 }
 
 

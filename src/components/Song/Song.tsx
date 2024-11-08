@@ -1,8 +1,11 @@
-import React, { useEffect } from "react"
-import { songInfoGet, songLyricsGet, songPicGet, getPlaylist } from "./lyrics_pics/LyricsPics"
 import { useState } from "react";
 import { useQuery } from "react-query";
+import React, { useEffect } from "react"
+import { songInfoGet, songLyricsGet, songPicGet, getPlaylist } from "./lyrics_pics/LyricsPics"
+import { getFlac } from "./flacs/flacs";
 import { randomPlay } from "./randomPlay/randomPlay";
+
+
 
 interface eachSong {
     id: number,
@@ -30,7 +33,7 @@ function Song() {
         id: 426850306,
         name: "中了爱情一枪",
         singer: "许钧",
-        path: "./"
+        path: "./music/中了爱情一枪.flac"
     }])
     //当前歌曲的id
     const [currentSongId, setCurrentSongId] = useState<number | null>(null);
@@ -38,8 +41,11 @@ function Song() {
     const [random, setRandom] = useState<number>(0);
     //切歌
     const [click, setClick] = useState<boolean>(true)
+    //音频
+    const [flac, setFlac] = useState<string>("")
 
 
+    //1.获得歌单
     const { data: isGetPlaylist } = useQuery([],
         async () => {
             const list = await getPlaylist();
@@ -55,18 +61,21 @@ function Song() {
         }
     }, [isGetPlaylist])
 
+    //2.切歌
     useEffect(() => {
         setRandom(randomPlay(playlist.length))
         setCurrentSongId(playlist[random].id)
     }, [click])
 
+    //3.获取歌曲所有信息
     const { data: isGetInfo } = useQuery([currentSongId],
         async () => {
             if (currentSongId === null) { return null };
             const songInfo = await songInfoGet(currentSongId);
             const songLyrics = await songLyricsGet(currentSongId);
             const songPic = await songPicGet(songInfo?.picUrl as string);
-            return [songInfo, songLyrics, songPic];
+            const songFlac = await getFlac(currentSongId)
+            return [songInfo, songLyrics, songPic, songFlac];
         },
         {
             initialData: null
@@ -77,6 +86,7 @@ function Song() {
             setInfo(isGetInfo[0] as SongInfo)
             setLyrics(isGetInfo[1] as string)
             setPic(isGetInfo[2] as string)
+            setFlac(isGetInfo[3] as string)
         }
     }, [isGetInfo])
 
@@ -90,12 +100,12 @@ function Song() {
                 <br />
                 {info.recordName}
                 <hr />
-                {info.picUrl}
-                {/* <img src={pic} /> */}
+                {/* <img src={pic} alt={info.name} /> */}
                 <hr />
                 {lyrics}
                 <hr />
             </div>
+            <audio controls src={flac}></audio>
             <button onClick={() => { setClick(!click) }}>
                 切歌
             </button>
