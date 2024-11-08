@@ -1,7 +1,10 @@
 interface SongInfo {
+    name: string,
+    singer: string,
     recordName: string,
     picUrl: string
 }
+
 interface eachSong {
     id: number,
     name: string,
@@ -16,10 +19,13 @@ export async function songInfoGet(songId: number): Promise<SongInfo | null> {
     try {
         const response = await fetch(songUrl);
         const json = await response.json();
-        const songInfo = json.songs[0].al
+        const songInfo1 = json.songs[0].ar[0].name
+        const songInfo2 = json.songs[0].al
         const info: SongInfo = {
-            recordName: songInfo.name,
-            picUrl: songInfo.picUrl
+            name: json.songs[0].name,
+            singer: songInfo1,
+            recordName: songInfo2.name,
+            picUrl: songInfo2.picUrl
         }
         return info
     } catch (error) {

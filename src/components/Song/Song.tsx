@@ -11,16 +11,34 @@ interface eachSong {
     path: string
 }
 interface SongInfo {
+    name: string,
+    singer: string,
     recordName: string,
     picUrl: string
 }
 
 
 function Song() {
-    const [info, setInfo] = useState<SongInfo>({ recordName: "", picUrl: "" })
+    //歌曲信息：歌名+歌手+专辑名+封面链接
+    const [info, setInfo] = useState<SongInfo>({ name: "", singer: "", recordName: "", picUrl: "" })
+    //歌词
     const [lyrics, setLyrics] = useState<string>("")
+    //专辑封面
     const [pic, setPic] = useState<string>("")
-    const [playlist, setPlaylist] = useState<eachSong[]>([])
+    //后端歌单
+    const [playlist, setPlaylist] = useState<eachSong[]>([{
+        id: 426850306,
+        name: "中了爱情一枪",
+        singer: "许钧",
+        path: "./"
+    }])
+    //当前歌曲的id
+    const [currentSongId, setCurrentSongId] = useState<number | null>(null);
+    //设置随机索引
+    const [random, setRandom] = useState<number>(0);
+    //切歌
+    const [click, setClick] = useState<boolean>(true)
+
 
     const { data: isGetPlaylist } = useQuery([],
         async () => {
@@ -37,10 +55,14 @@ function Song() {
         }
     }, [isGetPlaylist])
 
-    let currentSongId = 426850306
-    let random = 0
+    useEffect(() => {
+        setRandom(randomPlay(playlist.length))
+        setCurrentSongId(playlist[random].id)
+    }, [click])
+
     const { data: isGetInfo } = useQuery([currentSongId],
         async () => {
+            if (currentSongId === null) { return null };
             const songInfo = await songInfoGet(currentSongId);
             const songLyrics = await songLyricsGet(currentSongId);
             const songPic = await songPicGet(songInfo?.picUrl as string);
@@ -57,11 +79,15 @@ function Song() {
             setPic(isGetInfo[2] as string)
         }
     }, [isGetInfo])
-    if (playlist.length !== 0) {
-        random = randomPlay(playlist.length)
-        currentSongId = playlist[random].id;
-        return (
+
+
+    return (
+        <>
             <div>
+                {info.name}
+                <br />
+                {info.singer}
+                <br />
                 {info.recordName}
                 <hr />
                 {info.picUrl}
@@ -69,12 +95,11 @@ function Song() {
                 <hr />
                 {lyrics}
                 <hr />
-                {playlist && playlist[random].name}
             </div>
-        )
-    }
-    return (
-        <div>isloading</div>
+            <button onClick={() => { setClick(!click) }}>
+                切歌
+            </button>
+        </>
     )
 }
 
