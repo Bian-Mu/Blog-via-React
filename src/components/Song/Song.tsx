@@ -4,6 +4,9 @@ import React, { useEffect } from "react"
 import { songInfoGet, songLyricsGet, songPicGet, getPlaylist } from "./utils/lyrics_pics/LyricsPics"
 import { getFlac } from "./utils/flacs/flacs";
 import { randomPlay } from "./utils/randomPlay/randomPlay";
+
+
+
 import Player from "./Player/Player";
 import { parseLyrics } from "./Lyrics/convert"
 

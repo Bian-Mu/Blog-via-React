@@ -1,9 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 import calendarReducer from "./modules/calendar";
-
+import musicReducer from "./modules/music";
 const store = configureStore({
     reducer: {
-        calendar: calendarReducer
+        calendar: calendarReducer,
+        music: musicReducer
     }
 })
 
