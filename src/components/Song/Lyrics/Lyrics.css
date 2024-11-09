@@ -1,0 +1,12 @@
+#main-content-lyrics {
+    height: 500px;
+    width: 500px;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+
+#main-content-lyrics::-webkit-scrollbar {
+    display: none;
+}

@@ -1,0 +1,12 @@
+#visible {
+    margin: 50px 0 0 50px;
+    display: grid;
+    grid-template-columns: 4fr 5fr;
+    grid-gap: 10px;
+}
+
+#recordPic {
+    margin: 75px 0 0 75px;
+    width: 350px;
+    height: 350px;
+}

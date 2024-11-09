@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState, useEffect, useRef } from 'react';
+import "./Lyrics.css"
 
 interface LyricLine {
     time: number;
@@ -11,33 +11,37 @@ interface LyricsProps {
     currentTime: number;
     onLineClick: (time: number) => void;
 }
-
 const Lyrics: React.FC<LyricsProps> = ({ lyrics, currentTime, onLineClick }) => {
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [currentindex, setCurrentIndex] = useState(-1);
+    const lyricsContainerRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const index = lyrics.findIndex(line => line.time > currentTime);
-        setActiveIndex(index > 0 ? index - 1 : 0);
-    }, [currentTime, lyrics]);
+        setCurrentIndex(index > 0 ? index - 1 : 0)
+
+        if (lyricsContainerRef.current) {
+            const currentLyricElement = lyricsContainerRef.current.children[currentindex] as HTMLDivElement;
+            if (currentLyricElement) {
+                const offset = (lyricsContainerRef.current.offsetHeight - currentLyricElement.offsetHeight) / 2;
+                lyricsContainerRef.current.scrollTop = currentLyricElement.offsetTop - offset;
+            }
+        }
+    }, [currentTime, lyrics])
 
     return (
-        <div style={{ overflowY: 'auto', height: '70%' }}>
+        <div ref={lyricsContainerRef} id="main-content-lyrics">
             {lyrics.map((line, index) => (
-                <div
-                    key={index}
-                    onClick={() => onLineClick(line.time)}
+                <div className="line" key={index} onClick={() => onLineClick(line.time)}
                     style={{
                         transition: 'opacity 0.3s',
-                        opacity: index === activeIndex ? 1 : 0.5,
-                        cursor: 'pointer',
-                        backgroundColor: index === activeIndex ? 'yellow' : 'transparent',
-                    }}
-                >
+                        opacity: index === currentindex ? 1 : 0.5
+                    }}>
                     {line.text}
                 </div>
             ))}
         </div>
-    );
-};
+    )
+}
+
 
 export default Lyrics;

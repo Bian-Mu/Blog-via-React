@@ -1,5 +1,9 @@
-// 歌词解析函数，转换格式为 { time: number, text: string } 数组
-export function parseLyrics(lyricsStr: string): { time: number; text: string }[] {
+interface LyricLine {
+    time: number;
+    text: string;
+}
+
+export function parseLyrics(lyricsStr: string): LyricLine[] {
     const lines = lyricsStr.split('[');  // 以 '[' 分割整个字符串
     const lyrics = [];
 

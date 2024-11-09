@@ -16,14 +16,14 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { SongInfo, MusicState } from "../../store/modules/music";
 import Player from "./Player/Player";
-import { parseLyrics } from "./Lyrics/convert"
+import { parseLyrics } from "./utils/parseLyrics/parseLyrics"
 
 interface LyricLine {
     time: number;
     text: string;
 }
 interface Song {
-    cover: string;
+    pic: string;
     lyrics: LyricLine[];
     audio: string;
 }
@@ -81,16 +81,17 @@ function Song() {
         }
     )
     useEffect(() => {
+        const [songInfo, songLyrics, songPic, songFlac] = isGetInfo || []
         if (isGetInfo !== null && typeof isGetInfo !== "undefined") {
-            dispatch(setInfo(isGetInfo[0] as SongInfo))
-            dispatch(setLyrics(isGetInfo[1] as string))
-            dispatch(setPic(isGetInfo[2] as string))
-            dispatch(setFlac(isGetInfo[3] as string))
+            dispatch(setInfo(songInfo as SongInfo))
+            dispatch(setLyrics(songLyrics as string))
+            dispatch(setPic(songPic as string))
+            dispatch(setFlac(songFlac as string))
         }
     }, [isGetInfo, dispatch])
 
     const song: Song = {
-        cover: pic,
+        pic: pic,
         lyrics: parseLyrics(lyrics),
         audio: flac
     }
@@ -98,9 +99,6 @@ function Song() {
     return (
         <>
             <Player song={song} />
-            <button onClick={() => { dispatch(setClick(click)) }}>
-                切歌
-            </button>
         </>
     )
 }
