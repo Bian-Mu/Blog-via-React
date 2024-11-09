@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useQuery } from "react-query";
 import React, { useEffect } from "react"
-import { songInfoGet, songLyricsGet, songPicGet, getPlaylist } from "./lyrics_pics/LyricsPics"
-import { getFlac } from "./flacs/flacs";
-import { randomPlay } from "./randomPlay/randomPlay";
-
-
+import { songInfoGet, songLyricsGet, songPicGet, getPlaylist } from "./utils/lyrics_pics/LyricsPics"
+import { getFlac } from "./utils/flacs/flacs";
+import { randomPlay } from "./utils/randomPlay/randomPlay";
+import Player from "./Player/Player";
+import { parseLyrics } from "./Lyrics/convert"
 
 interface eachSong {
     id: number,
@@ -19,7 +19,15 @@ interface SongInfo {
     recordName: string,
     picUrl: string
 }
-
+interface LyricLine {
+    time: number;
+    text: string;
+}
+interface Song {
+    cover: string;
+    lyrics: LyricLine[];
+    audio: string;
+}
 
 function Song() {
     //歌曲信息：歌名+歌手+专辑名+封面链接
@@ -90,22 +98,28 @@ function Song() {
         }
     }, [isGetInfo])
 
+    const song: Song = {
+        cover: pic,
+        lyrics: parseLyrics(lyrics),
+        audio: flac
+    }
 
     return (
         <>
-            <div>
+            <Player song={song} />
+            {/* <div>
                 {info.name}
                 <br />
                 {info.singer}
                 <br />
                 {info.recordName}
                 <hr />
-                {/* <img src={pic} alt={info.name} /> */}
+                <img src={pic} alt={info.name} />
                 <hr />
                 {lyrics}
                 <hr />
             </div>
-            <audio controls src={flac}></audio>
+            <audio controls src={flac}></audio> */}
             <button onClick={() => { setClick(!click) }}>
                 切歌
             </button>
