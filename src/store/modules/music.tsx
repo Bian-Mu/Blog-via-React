@@ -1,19 +1,18 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit"
-interface eachSong {
+export interface eachSong {
     id: number,
     name: string,
     singer: string,
     path: string
 }
-interface SongInfo {
+export interface SongInfo {
     name: string,
     singer: string,
     recordName: string,
     picUrl: string
 }
 
-
-interface MusicState {
+export interface MusicState {
     info: SongInfo;
     lyrics: string;
     pic: string;
@@ -44,27 +43,35 @@ const musicStore = createSlice({
     name: "music",
     initialState: initialState,
     reducers: {
+        //歌曲信息：歌名+歌手+专辑名+封面链接
         setInfo(state, action: PayloadAction<SongInfo>) {
             state.info = action.payload;
         },
+        //歌词
         setLyrics(state, action: PayloadAction<string>) {
             state.lyrics = action.payload;
         },
+        //专辑封面
         setPic(state, action: PayloadAction<string>) {
             state.pic = action.payload;
         },
+        //后端歌单
         setPlaylist(state, action: PayloadAction<eachSong[]>) {
             state.playlist = action.payload;
         },
+        //当前歌曲的id
         setCurrentSongId(state, action: PayloadAction<number | null>) {
             state.currentSongId = action.payload;
         },
+        //设置随机索引
         setRandom(state, action: PayloadAction<number>) {
             state.random = action.payload;
         },
-        setClick(state) {
-            state.click = !state.click;
+        //切歌
+        setClick(state, action: PayloadAction<boolean>) {
+            state.click = !action.payload;
         },
+        //音频
         setFlac(state, action: PayloadAction<string>) {
             state.flac = action.payload;
         }

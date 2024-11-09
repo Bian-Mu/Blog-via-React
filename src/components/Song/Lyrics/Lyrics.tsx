@@ -6,8 +6,6 @@ interface LyricLine {
     text: string;
 }
 
-
-
 interface LyricsProps {
     lyrics: LyricLine[];
     currentTime: number;
