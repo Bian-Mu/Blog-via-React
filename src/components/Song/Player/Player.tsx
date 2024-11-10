@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import Lyrics from '../Lyrics/Lyrics';
 import "./Player.css"
 import Audio from '../Audio/Audio';
-import { setInfo, SongInfo } from '../../../store/modules/music';
+import { SongInfo } from '../../../store/modules/music';
 import { useSelector } from 'react-redux';
 interface LyricLine {
     time: number;
@@ -21,11 +21,13 @@ interface PlayerProps {
 }
 
 const Player: React.FC<PlayerProps> = ({ song }) => {
+    //当前播放时间（影响歌词高亮）
     const [currentTime, setCurrentTime] = useState(0);
     const { info } = useSelector((state: { music: { info: SongInfo } }) => state.music)
     const audioRef = useRef<HTMLAudioElement>(null);
 
     const TimeUpdate = () => {
+        //时刻将当前状态传递给“currentTime”
         if (audioRef.current) {
             setCurrentTime(audioRef.current.currentTime);
         }
@@ -36,8 +38,12 @@ const Player: React.FC<PlayerProps> = ({ song }) => {
             audioRef.current.currentTime = time;
         }
     };
+
+
     const box = document.getElementById("main-content-audio")
     box?.style.setProperty('--background-image-url', `url(${info.picUrl})`)
+
+
     return (
         <div id="main-content-audio" >
             <div id="visible">

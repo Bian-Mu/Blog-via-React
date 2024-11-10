@@ -9,20 +9,19 @@ interface AudioControlsProps {
 }
 
 const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
+    //进度条
     const [progress, setProgress] = useState(0);
+    //当前播放状态
     const [isPlaying, setIsPlaying] = useState(false);
+    //当前播放时间（用于span）
     const [currentTime, setCurrentTime] = useState(0);
+    //总时长
     const [duration, setDuration] = useState(0);
+
     const dispatch = useDispatch();
     const { click } = useSelector((state: { music: { click: boolean } }) => state.music);
 
-    const handleTimeUpdate = () => {
-        if (audioRef.current && audioRef.current.duration > 0) {
-            setCurrentTime(audioRef.current.currentTime);
-            setProgress((audioRef.current.currentTime / audioRef.current.duration) * 100);
-        }
-    };
-
+    //切换歌曲状态
     const togglePlayPause = () => {
         if (audioRef.current) {
             isPlaying ? audioRef.current.pause() : audioRef.current.play();
@@ -30,7 +29,8 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
         }
     };
 
-    const handleProgressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    //点击进度条
+    const changeProgress = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newProgress = parseFloat(e.target.value);
         setProgress(newProgress);
         if (audioRef.current) {
@@ -38,14 +38,15 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
         }
     };
 
-    const handleNextSong = () => {
+    //切歌
+    const nextSong = () => {
         setProgress(0);
         setCurrentTime(0);
         setIsPlaying(false);
         dispatch(setClick(click));
     };
 
-
+    //歌曲切换时重新渲染各种状态
     useEffect(() => {
         const handleLoadedMetadata = () => {
             if (audioRef.current) {
@@ -54,13 +55,18 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
                 setProgress(0);
             }
         };
+        const handleTimeUpdate = () => {
+            if (audioRef.current) {
+                setCurrentTime(audioRef.current.currentTime);
+                setProgress((audioRef.current.currentTime / audioRef.current.duration) * 100);
+            }
+        };
 
         const audio = audioRef.current;
         if (audio) {
             audio.addEventListener('loadedmetadata', handleLoadedMetadata);
             audio.addEventListener('timeupdate', handleTimeUpdate);
         }
-
         return () => {
             if (audio) {
                 audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
@@ -72,59 +78,26 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
 
 
     return (
-        <div style={{ width: '550px', textAlign: 'center', margin: '20px auto', background: 'transparent' }}>
-            {/* 时间显示 */}
-            <div style={{ color: "white", display: 'flex', justifyContent: 'space-between', marginBottom: '5px', fontSize: '14px' }}>
+        <div id="playerProgress" >
+            <div id="progress" >
                 <span>{formatTime(currentTime)}</span>
-
-                {/* 自定义进度条 */}
-                <input
-                    className="custom-range"
+                <input id="progressInput"
                     type="range"
                     min="0"
                     max="100"
                     value={progress}
-                    onChange={handleProgressChange}
-                    style={{
-                        width: '450px',
-                        cursor: 'pointer',
-                    }}
+                    onChange={changeProgress}
                 />
-
                 <span>{formatTime(duration)}</span>
             </div>
-            {/* 播放 / 暂停按钮 */}
-            <button
-                onClick={togglePlayPause}
-                style={{
-                    padding: '5px 10px',
-                    fontSize: '16px',
-                    cursor: 'pointer',
-                    backgroundColor: isPlaying ? '#f44336' : '#4caf50',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '4px',
-                    marginTop: '10px', // 放在进度条下方
-                }}
-            >
+
+            <button id="progressPlayButton"
+                onClick={togglePlayPause}>
                 {isPlaying ? '| |' : '▶'}
             </button>
-
-            {/* 切歌按钮 */}
-            <button
-                onClick={handleNextSong}
-                style={{
-                    padding: '5px 10px',
-                    fontSize: '16px',
-                    cursor: 'pointer',
-                    backgroundColor: '#2196f3',
-                    color: '#fff',
-                    border: 'none',
-                    borderRadius: '4px',
-                    marginTop: '10px',
-                }}
-            >
-                ⫸
+            <button id="progressNextSongButton"
+                onClick={nextSong}>
+                ⌆
             </button>
         </div>
     );

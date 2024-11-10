@@ -1,5 +1,5 @@
 #visible {
-    margin: 50px 0 0 50px;
+    margin: 40px 0 0 50px;
     display: grid;
     grid-template-columns: 4fr 5.2fr;
     grid-gap: 0px;
@@ -7,6 +7,7 @@
 
 #songInfo {
     margin: 50px 0 0 75px;
+    font-size: 20px;
 }
 
 #recordPic {
@@ -23,8 +24,8 @@
 }
 
 #main-content-audio {
-    width: 1150px;
-    height: 600px;
+    width: 1120px;
+    height: 620px;
     background-image: var(--background-image-url);
     background-size: 300%;
     background-position: center;

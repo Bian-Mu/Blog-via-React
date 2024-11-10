@@ -13,9 +13,9 @@ const MonthList: React.FC = () => {
 
     return (
         <>
-            <button className="monthConvert" onClick={() => dispatch(decrement())}>&lt;&lt;</button>
-            <p id="monthDisplay">2024 =&gt; {month}</p>
-            <button className="monthConvert" onClick={() => dispatch(increment())}>&gt;&gt;</button>
+            <button className="monthConvert" onClick={() => dispatch(decrement())}>◀</button>
+            <p id="monthDisplay">2024 ⇨ {month}</p>
+            <button className="monthConvert" onClick={() => dispatch(increment())}>▶</button>
         </>
     )
 }

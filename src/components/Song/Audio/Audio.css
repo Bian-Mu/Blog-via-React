@@ -1,0 +1,71 @@
+#playerProgress {
+    width: 550px;
+    text-align: center;
+    margin: 5px 300px 0 300px;
+}
+
+#progress {
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    font-size: 15px;
+}
+
+#progressInput {
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+    width: 450px;
+    margin-top: 6px;
+    cursor: pointer;
+    height: 8px;
+    border-radius: 5px;
+}
+
+#progressPlayButton {
+    margin: 5px 10px 0 42px;
+    font-size: 24px;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    border: none;
+}
+
+#progressNextSongButton {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: transparent;
+    color: white;
+    border: none;
+    rotate: 90deg;
+}
+
+/* Chrome, Safari, Edge */
+#progressInput::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    appearance: none;
+    background: linear-gradient(to right, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 100%);
+    height: 8px;
+    border-radius: 5px;
+}
+
+#progressInput::-webkit-slider-thumb {
+    border: none;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    background: rgb(134, 134, 134);
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+
+/* Firefox */
+#progressInput::-moz-range-progress {
+    background: rgb(255, 255, 255);
+}
+
+#progressInput::-moz-range-track {
+    background: rgb(108, 108, 108);
+}
