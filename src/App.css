@@ -8,6 +8,10 @@ article {
     background-color: rgba(244, 202, 231, 0.5);
 }
 
+.songLocation {
+    background-color: rgba(200, 200, 200, 0.4);
+}
+
 article {
     display: inline-block;
     width: 1340px;
