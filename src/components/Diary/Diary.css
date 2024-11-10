@@ -1,3 +1,11 @@
+ #main-content-diary {
+     height: 700px;
+ }
+
+ #content-diary {
+     height: 530px
+ }
+
  h1 {
      font-weight: 520;
      font-size: 2.3rem;
@@ -33,9 +41,9 @@
 
  article div[id='main-content'] {
      display: block;
-     margin-top: 1%;
+     margin-top: 2%;
      margin-bottom: 1%;
-     height: 60%;
+     height: 75%;
      overflow-y: auto;
      overflow-x: hidden;
      padding: 1%;

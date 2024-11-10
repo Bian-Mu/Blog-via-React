@@ -72,27 +72,27 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
 
 
     return (
-        <div style={{ width: '300px', textAlign: 'center', margin: '20px auto', background: 'transparent' }}>
+        <div style={{ width: '550px', textAlign: 'center', margin: '20px auto', background: 'transparent' }}>
             {/* 时间显示 */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '5px', fontSize: '14px' }}>
+            <div style={{ color: "white", display: 'flex', justifyContent: 'space-between', marginBottom: '5px', fontSize: '14px' }}>
                 <span>{formatTime(currentTime)}</span>
+
+                {/* 自定义进度条 */}
+                <input
+                    className="custom-range"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={progress}
+                    onChange={handleProgressChange}
+                    style={{
+                        width: '450px',
+                        cursor: 'pointer',
+                    }}
+                />
+
                 <span>{formatTime(duration)}</span>
             </div>
-
-            {/* 自定义进度条 */}
-            <input
-                className="custom-range"
-                type="range"
-                min="0"
-                max="100"
-                value={progress}
-                onChange={handleProgressChange}
-                style={{
-                    width: '100%',
-                    cursor: 'pointer',
-                }}
-            />
-
             {/* 播放 / 暂停按钮 */}
             <button
                 onClick={togglePlayPause}
@@ -107,7 +107,7 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
                     marginTop: '10px', // 放在进度条下方
                 }}
             >
-                {isPlaying ? '暂停' : '播放'}
+                {isPlaying ? '| |' : '▶'}
             </button>
 
             {/* 切歌按钮 */}
@@ -124,7 +124,7 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
                     marginTop: '10px',
                 }}
             >
-                切歌
+                ⫸
             </button>
         </div>
     );

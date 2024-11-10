@@ -21,23 +21,25 @@ function DiaryContent() {
     const { title, text } = useMd();
 
     return (
-        <>
-            <div id="time-button">
-                <button name="选择日期" onClick={() => SetCalendar(!calendar)}>
-                    <mark>
-                        re-DAYs
-                    </mark>
-                </button>
-            </div>
-            {calendar && <TimeButton />}
-            <h1 id="date">{title}</h1>
-            <div id="main-content">
-                <p id="content" dangerouslySetInnerHTML={{ __html: text }}>
-                </p>
+        <div id="main-content-diary">
+            <div id="content-diary">
+                <div id="time-button">
+                    <button name="选择日期" onClick={() => SetCalendar(!calendar)}>
+                        <mark>
+                            re-DAYs
+                        </mark>
+                    </button>
+                </div>
+                {calendar && <TimeButton />}
+                <h1 id="date">{title}</h1>
+                <div id="main-content">
+                    <p id="content" dangerouslySetInnerHTML={{ __html: text }}>
+                    </p>
+                </div>
             </div>
             <hr />
             <Comment />
-        </>
+        </div>
     );
 }
 

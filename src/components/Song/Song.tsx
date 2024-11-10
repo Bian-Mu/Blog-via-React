@@ -10,7 +10,6 @@ import {
     setPlaylist,
     setCurrentSongId,
     setRandom,
-    setClick,
     setFlac
 } from "../../store/modules/music"
 import { useDispatch, useSelector } from "react-redux";
@@ -32,7 +31,6 @@ function Song() {
 
     const dispatch = useDispatch();
     const {
-        info,
         lyrics,
         pic,
         playlist,

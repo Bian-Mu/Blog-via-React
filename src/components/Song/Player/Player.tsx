@@ -2,6 +2,8 @@ import React, { useState, useRef } from 'react';
 import Lyrics from '../Lyrics/Lyrics';
 import "./Player.css"
 import Audio from '../Audio/Audio';
+import { setInfo, SongInfo } from '../../../store/modules/music';
+import { useSelector } from 'react-redux';
 interface LyricLine {
     time: number;
     text: string;
@@ -20,6 +22,7 @@ interface PlayerProps {
 
 const Player: React.FC<PlayerProps> = ({ song }) => {
     const [currentTime, setCurrentTime] = useState(0);
+    const { info } = useSelector((state: { music: { info: SongInfo } }) => state.music)
     const audioRef = useRef<HTMLAudioElement>(null);
 
     const TimeUpdate = () => {
@@ -33,10 +36,17 @@ const Player: React.FC<PlayerProps> = ({ song }) => {
             audioRef.current.currentTime = time;
         }
     };
+    const box = document.getElementById("main-content-audio")
+    box?.style.setProperty('--background-image-url', `url(${info.picUrl})`)
     return (
-        <div id="main-content-audio">
+        <div id="main-content-audio" >
             <div id="visible">
-                <img id="recordPic" src={song.pic} alt="pic" />
+                <div id="songInfo">
+                    <div>《{info.name}》</div>
+                    <img id="recordPic" src={song.pic} alt="pic" />
+                    <div>{info.singer}    《{info.recordName}》</div>
+                </div>
+
                 <div id="lyrics">
                     <Lyrics lyrics={song.lyrics} currentTime={currentTime} onLineClick={jumpTo} />
                 </div>

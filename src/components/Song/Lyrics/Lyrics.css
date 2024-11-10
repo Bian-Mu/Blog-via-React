@@ -1,12 +1,18 @@
 #main-content-lyrics {
-    height: 500px;
+    margin: 50px 0 0 0;
+    height: 400px;
     width: 500px;
     overflow-y: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    color: white;
 }
 
 
 #main-content-lyrics::-webkit-scrollbar {
     display: none;
+}
+
+.line {
+    text-align: center;
 }

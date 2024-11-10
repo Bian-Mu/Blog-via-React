@@ -13,23 +13,23 @@ interface LyricsProps {
 }
 const Lyrics: React.FC<LyricsProps> = ({ lyrics, currentTime, onLineClick }) => {
     const [currentindex, setCurrentIndex] = useState(-1);
-    const lyricsContainerRef = useRef<HTMLDivElement>(null);
+    const lyricsRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
         const index = lyrics.findIndex(line => line.time > currentTime);
         setCurrentIndex(index > 0 ? index - 1 : 0)
 
-        if (lyricsContainerRef.current) {
-            const currentLyricElement = lyricsContainerRef.current.children[currentindex] as HTMLDivElement;
-            if (currentLyricElement) {
-                const offset = (lyricsContainerRef.current.offsetHeight - currentLyricElement.offsetHeight) / 2;
-                lyricsContainerRef.current.scrollTop = currentLyricElement.offsetTop - offset;
+        if (lyricsRef.current) {
+            const currentLyric = lyricsRef.current.children[currentindex] as HTMLDivElement;
+            if (currentLyric) {
+                const offset = lyricsRef.current.offsetHeight - currentLyric.offsetHeight * 2;
+                lyricsRef.current.scrollTop = currentLyric.offsetTop - offset;
             }
         }
     }, [currentTime, lyrics])
 
     return (
-        <div ref={lyricsContainerRef} id="main-content-lyrics">
+        <div ref={lyricsRef} id="main-content-lyrics">
             {lyrics.map((line, index) => (
                 <div className="line" key={index} onClick={() => onLineClick(line.time)}
                     style={{
