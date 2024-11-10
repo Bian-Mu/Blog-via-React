@@ -21,7 +21,7 @@ interface LyricLine {
     time: number;
     text: string;
 }
-interface Song {
+interface Music {
     pic: string;
     lyrics: LyricLine[];
     audio: string;
@@ -88,7 +88,7 @@ function Song() {
         }
     }, [isGetInfo, dispatch])
 
-    const song: Song = {
+    const song: Music = {
         pic: pic,
         lyrics: parseLyrics(lyrics),
         audio: flac
