@@ -3,7 +3,7 @@ import "./Diary.css"
 import TimeButton from "./timebutton/timebutton";
 import { MdProvider } from "../../context/diarymd"
 import { useMd } from "../../context/diarymd";
-import { marked } from "marked"
+
 import React from "react";
 import Comment from "../zother/Comments/Comment";
 
@@ -21,23 +21,25 @@ function DiaryContent() {
     const { title, text } = useMd();
 
     return (
-        <>
-            <div id="time-button">
-                <button name="选择日期" onClick={() => SetCalendar(!calendar)}>
-                    <mark>
-                        re-DAYs
-                    </mark>
-                </button>
-            </div>
-            {calendar && <TimeButton />}
-            <h1 id="date">{title}</h1>
-            <div id="main-content">
-                <p id="content" dangerouslySetInnerHTML={{ __html: (marked(text) as string) }}>
-                </p>
+        <div id="main-content-diary">
+            <div id="content-diary">
+                <div id="time-button">
+                    <button name="选择日期" onClick={() => SetCalendar(!calendar)}>
+                        <mark>
+                            re-DAYs
+                        </mark>
+                    </button>
+                </div>
+                {calendar && <TimeButton />}
+                <h1 id="date">{title}</h1>
+                <div id="main-content">
+                    <p id="content" dangerouslySetInnerHTML={{ __html: text }}>
+                    </p>
+                </div>
             </div>
             <hr />
             <Comment />
-        </>
+        </div>
     );
 }
 

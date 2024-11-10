@@ -1,41 +1,103 @@
-import React from "react"
+import { useQuery } from "react-query";
+import React, { useEffect } from "react"
+import { songInfoGet, songLyricsGet, songPicGet, getPlaylist } from "./utils/lyrics_pics/LyricsPics"
+import { getFlac } from "./utils/flacs/flacs";
+import { randomPlay } from "./utils/randomPlay/randomPlay";
+import {
+    setInfo,
+    setLyrics,
+    setPic,
+    setPlaylist,
+    setCurrentSongId,
+    setRandom,
+    setFlac
+} from "../../store/modules/music"
+import { useDispatch, useSelector } from "react-redux";
+import { SongInfo, MusicState } from "../../store/modules/music";
+import Player from "./Player/Player";
+import { parseLyrics } from "./utils/parseLyrics/parseLyrics"
 
-// 本功能使用网易云api
-
-async function songInfoGet(songId: number) {
-    const songUrl = `http://localhost:4000/api/songInfo?songId=${songId}`;
-
-    try {
-        const response = await fetch(songUrl);
-        const json = await response.json();
-        const songInfo = json.songs[0].al
-        console.log(songInfo.name + songInfo.picUrl);
-    } catch (error) {
-        console.log("Error fetching data: ", error);
-    }
+interface LyricLine {
+    time: number;
+    text: string;
 }
-
-async function songLyricsGet(songId: number) {
-    const lyricsUrl = `http://localhost:4000/api/lyricsInfo?songId=${songId}`;
-
-    try {
-        const response = await fetch(lyricsUrl);
-        const json = await response.json();
-        const lyrics = json.lyric
-        console.log(lyrics);
-
-    } catch (error) {
-        console.log("Error fetching data: ", error);
-    }
+interface Song {
+    pic: string;
+    lyrics: LyricLine[];
+    audio: string;
 }
 
 function Song() {
-    songInfoGet(426850306)
-    songLyricsGet(426850306)
+
+    const dispatch = useDispatch();
+    const {
+        lyrics,
+        pic,
+        playlist,
+        currentSongId,
+        random,
+        click,
+        flac
+    } = useSelector((state: {
+        music: MusicState
+    }) => state.music)
+
+    //1.获得歌单
+    const { data: isGetPlaylist } = useQuery([],
+        async () => {
+            const list = await getPlaylist();
+            return list;
+        },
+        {
+            initialData: []
+        }
+    )
+    useEffect(() => {
+        if (isGetPlaylist) {
+            dispatch(setPlaylist(isGetPlaylist))
+        }
+    }, [isGetPlaylist, dispatch])
+
+    //2.切歌
+    useEffect(() => {
+        dispatch(setRandom(randomPlay(playlist.length)))
+        dispatch(setCurrentSongId(playlist[random].id))
+    }, [click, dispatch])
+
+    //3.获取歌曲所有信息
+    const { data: isGetInfo } = useQuery([currentSongId],
+        async () => {
+            if (currentSongId === null) { return null };
+            const songInfo = await songInfoGet(currentSongId);
+            const songLyrics = await songLyricsGet(currentSongId);
+            const songPic = await songPicGet(songInfo?.picUrl as string);
+            const songFlac = await getFlac(currentSongId)
+            return [songInfo, songLyrics, songPic, songFlac];
+        },
+        {
+            initialData: null
+        }
+    )
+    useEffect(() => {
+        const [songInfo, songLyrics, songPic, songFlac] = isGetInfo || []
+        if (isGetInfo !== null && typeof isGetInfo !== "undefined") {
+            dispatch(setInfo(songInfo as SongInfo))
+            dispatch(setLyrics(songLyrics as string))
+            dispatch(setPic(songPic as string))
+            dispatch(setFlac(songFlac as string))
+        }
+    }, [isGetInfo, dispatch])
+
+    const song: Song = {
+        pic: pic,
+        lyrics: parseLyrics(lyrics),
+        audio: flac
+    }
+
     return (
-        <div>
-            this is song
-        </div>
+        <>
+            <Player song={song} />
+        </>
     )
 }
 

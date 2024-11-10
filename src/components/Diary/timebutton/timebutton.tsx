@@ -13,9 +13,9 @@ const MonthList: React.FC = () => {
 
     return (
         <>
-            <button className="monthConvert" onClick={() => dispatch(decrement())}>&lt;&lt;</button>
-            <p id="monthDisplay">2024 =&gt; {month}</p>
-            <button className="monthConvert" onClick={() => dispatch(increment())}>&gt;&gt;</button>
+            <button className="monthConvert" onClick={() => dispatch(decrement())}>◀</button>
+            <p id="monthDisplay">2024 ⇨ {month}</p>
+            <button className="monthConvert" onClick={() => dispatch(increment())}>▶</button>
         </>
     )
 }
@@ -38,7 +38,7 @@ const Everyday: React.FC<EverydayProps> = ({ date }) => {
             console.error("Error fetching data: ", error)
         }
     }
-    const { data: isAvailable, isLoading, isError } = useQuery([month, date],
+    const { data: isAvailable } = useQuery([month, date],
         async () => {
             const url = `http://localhost:4000/public/2024md/${month}-${date}.md`;
             const response = await fetch(url);
@@ -52,10 +52,10 @@ const Everyday: React.FC<EverydayProps> = ({ date }) => {
         }
     )
     useEffect(() => {
-        if (!isLoading && !isError && typeof isAvailable === "boolean") {
+        if (typeof isAvailable === "boolean") {
             SetAvailable(isAvailable);
         }
-    }, [isAvailable, isLoading, isError]);
+    }, [isAvailable]);
     // useEffect(() => {
     //     if (date === "～") {
     //         SetAvailable(false)

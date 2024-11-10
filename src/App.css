@@ -1,7 +1,7 @@
 main {
     display: flex;
     flex-wrap: nowrap;
-    width: 1500px;
+    width: 1620px;
 }
 
 article {
@@ -10,13 +10,13 @@ article {
 
 article {
     display: inline-block;
-    width: 1080px;
-    height: 650px;
-    margin-left: 18px;
+    width: 1340px;
+    height: 700px;
+    margin-left: 20px;
     vertical-align: top;
     border: 0.15rem dashed white;
-    border-radius: 3.5%;
+    border-radius: 4%;
     padding-left: 3%;
-    padding-right: 1.5%;
+    padding-right: 3%;
 
 }

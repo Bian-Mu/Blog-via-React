@@ -1,3 +1,7 @@
+#main-content-draw {
+    height: 700px;
+}
+
 #content-draw {
     padding-top: 2%;
     display: grid;
@@ -6,9 +10,8 @@
     counter-reset: imgNumber;
 }
 
-article div[id='main-content-draw'] {
+article div[id='main-draw'] {
     display: block;
-    margin-top: 1%;
     margin-bottom: 1%;
     height: 73.6%;
     overflow-y: auto;

@@ -1,6 +1,7 @@
 import { ReactNode, createContext, useState, useContext, useEffect } from "react";
 import { useSelector } from "react-redux";
 import React from "react"
+import { marked } from "marked"
 interface MdContextType {
     title: string;
     text: string;
@@ -20,13 +21,13 @@ export function MdProvider({ children }: MdProviderProps) {
     let time = `2024/${month}/${today.getDate()}`;
 
     const [title, SetTitle] = useState(time)
-    const [text, SetText] = useState("## Temporarily blank")
+    const [text, SetText] = useState(marked("## Temporarily blank") as string)
     function updateTitle(newtitle: string) {
         SetTitle(newtitle)
     }
 
     function updateText(newtext: string) {
-        SetText(newtext)
+        SetText(marked(newtext) as string)
     }
 
     // //组件挂载后通过钩子异步获取数据
@@ -38,11 +39,11 @@ export function MdProvider({ children }: MdProviderProps) {
                 const response = await fetch(url);
                 if (response.status !== 201) {
                     const initialText = await response.text();
-                    SetText(initialText);
+                    updateText(initialText);
                 }
 
             } catch (error) {
-                SetText("## Temporarily blank");
+                updateText("## Temporarily blank");
             }
         }
         initialGetMd();
