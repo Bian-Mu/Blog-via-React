@@ -22,7 +22,7 @@ const Lyrics: React.FC<LyricsProps> = ({ lyrics, currentTime, onLineClick }) => 
         if (lyricsRef.current) {
             const currentLyric = lyricsRef.current.children[currentindex] as HTMLDivElement;
             if (currentLyric) {
-                const offset = lyricsRef.current.offsetHeight - currentLyric.offsetHeight * 2;
+                const offset = 1.2 * lyricsRef.current.offsetHeight - currentLyric.offsetHeight * 2;
                 lyricsRef.current.scrollTop = currentLyric.offsetTop - offset;
             }
         }
