@@ -32,7 +32,7 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
     //点击进度条
     const changeProgress = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newProgress = parseFloat(e.target.value);
-        setProgress(newProgress);
+        setProgress(newProgress ? newProgress : 0);
         if (audioRef.current) {
             audioRef.current.currentTime = (newProgress / 100) * audioRef.current.duration;
         }
@@ -85,7 +85,7 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
                     type="range"
                     min="0"
                     max="100"
-                    value={progress}
+                    value={progress.toString()}
                     onChange={changeProgress}
                 />
                 <span>{formatTime(duration)}</span>

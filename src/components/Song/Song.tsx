@@ -49,20 +49,30 @@ function Song() {
             return list;
         },
         {
-            initialData: []
+            initialData: [],
+            onSuccess(data) {
+                dispatch(setPlaylist(data))
+            }
         }
     )
-    useEffect(() => {
-        if (isGetPlaylist) {
-            dispatch(setPlaylist(isGetPlaylist))
-        }
-    }, [isGetPlaylist, dispatch])
+    // useEffect(() => {
+    //     if (isGetPlaylist) {
+    //         dispatch(setPlaylist(isGetPlaylist))
+    //     }
+    // }, [isGetPlaylist, dispatch])
 
     //2.切歌
-    useEffect(() => {
-        dispatch(setRandom(randomPlay(playlist.length)))
+    const changeSong = () => {
+        dispatch(setRandom(randomPlay(playlist.length)));
         dispatch(setCurrentSongId(playlist[random].id))
-    }, [click, dispatch])
+    }
+    useEffect(() => {
+        changeSong();
+    }, [click])
+    // useEffect(() => {
+    //     dispatch(setRandom(randomPlay(playlist.length)))
+    //     dispatch(setCurrentSongId(playlist[random].id))
+    // }, [click, dispatch])
 
     //3.获取歌曲所有信息
     const { data: isGetInfo } = useQuery([currentSongId],
@@ -75,18 +85,25 @@ function Song() {
             return [songInfo, songLyrics, songPic, songFlac];
         },
         {
-            initialData: null
+            initialData: null,
+            onSuccess: (data) => {
+                const [songInfo, songLyrics, songPic, songFlac] = isGetInfo || [];
+                dispatch(setInfo(songInfo as SongInfo))
+                dispatch(setLyrics(songLyrics as string))
+                dispatch(setPic(songPic as string))
+                dispatch(setFlac(songFlac as string))
+            }
         }
     )
-    useEffect(() => {
-        const [songInfo, songLyrics, songPic, songFlac] = isGetInfo || []
-        if (isGetInfo !== null && typeof isGetInfo !== "undefined") {
-            dispatch(setInfo(songInfo as SongInfo))
-            dispatch(setLyrics(songLyrics as string))
-            dispatch(setPic(songPic as string))
-            dispatch(setFlac(songFlac as string))
-        }
-    }, [isGetInfo, dispatch])
+    // useEffect(() => {
+    //     const [songInfo, songLyrics, songPic, songFlac] = isGetInfo || []
+    //     if (isGetInfo !== null && typeof isGetInfo !== "undefined") {
+    //         dispatch(setInfo(songInfo as SongInfo))
+    //         dispatch(setLyrics(songLyrics as string))
+    //         dispatch(setPic(songPic as string))
+    //         dispatch(setFlac(songFlac as string))
+    //     }
+    // }, [isGetInfo, dispatch])
 
     const song: Music = {
         pic: pic,
