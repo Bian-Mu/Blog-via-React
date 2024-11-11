@@ -1,14 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { setClick } from "../../../store/modules/music";
-import { useDispatch, useSelector } from "react-redux";
 import formatTime from "../utils/formatTime/formatTime";
 import "./Audio.css"
 interface AudioControlsProps {
     audioRef: React.RefObject<HTMLAudioElement>;
+    handleNextSong: () => void
 }
 
-const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
+const Audio: React.FC<AudioControlsProps> = ({ audioRef, handleNextSong }) => {
     //进度条
     const [progress, setProgress] = useState(0);
     //当前播放状态
@@ -17,9 +16,10 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
     const [currentTime, setCurrentTime] = useState(0);
     //总时长
     const [duration, setDuration] = useState(0);
-
-    const dispatch = useDispatch();
-    const { click } = useSelector((state: { music: { click: boolean } }) => state.music);
+    //用于初始化第一首歌
+    useEffect(() => {
+        handleNextSong()
+    }, [])
 
     //切换歌曲状态
     const togglePlayPause = () => {
@@ -43,7 +43,7 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
         setProgress(0);
         setCurrentTime(0);
         setIsPlaying(false);
-        dispatch(setClick(click));
+        handleNextSong();
     };
 
     //歌曲切换时重新渲染各种状态

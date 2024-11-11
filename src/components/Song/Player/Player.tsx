@@ -9,15 +9,16 @@ interface LyricLine {
     text: string;
 }
 
-interface Song {
+export interface Music {
     pic: string;
     lyrics: LyricLine[];
     audio: string;
+    handleNextSong: () => void
 }
 
 
 interface PlayerProps {
-    song: Song;
+    song: Music;
 }
 
 const Player: React.FC<PlayerProps> = ({ song }) => {
@@ -57,7 +58,7 @@ const Player: React.FC<PlayerProps> = ({ song }) => {
                     <Lyrics lyrics={song.lyrics} currentTime={currentTime} onLineClick={jumpTo} />
                 </div>
             </div>
-            <Audio audioRef={audioRef} />
+            <Audio audioRef={audioRef} handleNextSong={song.handleNextSong} />
             <audio
                 ref={audioRef}
                 src={song.audio}
