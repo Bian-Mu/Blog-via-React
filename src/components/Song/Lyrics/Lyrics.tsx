@@ -22,7 +22,7 @@ const Lyrics: React.FC<LyricsProps> = ({ lyrics, currentTime, onLineClick }) => 
         if (lyricsRef.current) {
             const currentLyric = lyricsRef.current.children[currentindex] as HTMLDivElement;
             if (currentLyric) {
-                const offset = 1.3 * lyricsRef.current.offsetHeight; //歌词容器的可视高度
+                const offset = 0.8 * lyricsRef.current.offsetHeight; //歌词容器的可视高度
                 lyricsRef.current.scrollTop = currentLyric.offsetTop - offset; //当前行距离行顶的高度减去容器高度（越小歌词越靠下）
             }
         }
