@@ -1,3 +1,10 @@
+#nav-content {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 1600px;
+}
+
+
 nav {
     background-color: rgba(244, 202, 231, 0.5);
 }
@@ -7,15 +14,14 @@ ul {
 }
 
 header {
-    display: inline-block;
-    width: 72vw;
+    width: 1300px;
 }
 
 nav {
-    width: 75vw;
-    height: 8vh;
-    margin-left: -1.5vw;
-    margin-bottom: 3vh;
+    width: 1250px;
+    height: 72px;
+    margin-top: 30px;
+    margin-bottom: 35px;
     border-radius: 1.41rem;
 }
 
@@ -28,11 +34,11 @@ nav ul {
 nav li {
     text-align: center;
     flex: 1;
-    margin-left: -3%;
+    padding-top: 3px;
 }
 
 nav button {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     padding: 3% 6% 3% 6%;
     border: none;
     background-color: rgba(244, 202, 231, 0);
@@ -48,12 +54,9 @@ nav button:hover {
 }
 
 #logo {
-    font-size: 2.5rem;
-    font-weight: 520;
-    display: inline-block;
-    width: 20vw;
-    margin-bottom: 4vh;
-    margin-left: 3.5vw;
+    font-size: 40px;
+    width: 310px;
+    margin: 35px 124px 40px 75px;
 
     background: url(../../../assets/image/emmm.jpg) no-repeat center;
     background-size: 300% 675%;

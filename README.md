@@ -9,3 +9,8 @@
 ## Version
 
 - 10.23 初始化
+- 11.07 将ts分支覆盖master、修缮一些bug。完成了一些新功能
+
+## ToDoList
+
+Blank

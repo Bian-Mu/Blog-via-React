@@ -4,10 +4,10 @@ aside {
 
 aside {
     display: inline-block;
-    width: 13vw;
-    height: 60vh;
-    margin-left: 3vw;
-    margin-right: 5vw;
+    width: 260px;
+    height: 540px;
+    margin-left: 50px;
+    margin-right: 80px;
     border-radius: 1.4rem;
     box-shadow:
         0 4px 8px rgba(0, 0, 0, 0.15),
@@ -24,9 +24,9 @@ aside>div {
 
 figure {
     display: block;
-    margin-left: 3.5vw;
-    margin-top: 5vh;
-    margin-bottom: 1vh;
+    margin-left: 60px;
+    margin-top: 40px;
+    margin-bottom: 10px;
 }
 
 ul p:nth-of-type(2) {
@@ -36,8 +36,8 @@ ul p:nth-of-type(2) {
 
 #avatar {
     object-fit: cover;
-    width: 6vw;
-    height: 6vw;
+    width: 100px;
+    height: 100px;
 }
 
 #contact a {

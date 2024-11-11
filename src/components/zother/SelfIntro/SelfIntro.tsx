@@ -1,5 +1,7 @@
 import "./SelfIntro.css"
 import avatar from "../../../assets/image/avatar.jpg"
+
+import React from "react"
 const contact_list = [
     {
         target: "Github",

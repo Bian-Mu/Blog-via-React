@@ -5,7 +5,7 @@ let today = new Date()
 const calendarStore = createSlice({
     name: "calendar",
     initialState: {
-        month: today.getMonth() + 1
+        month: today.getMonth() + 1 as number
     },
     reducers: {
         increment(state) {
@@ -17,13 +17,16 @@ const calendarStore = createSlice({
             if (state.month > 1) {
                 state.month--
             }
+        },
+        reset(state) {
+            state.month = today.getMonth() + 1 as number
         }
     }
 })
 
-const { increment, decrement } = calendarStore.actions
+const { increment, decrement, reset } = calendarStore.actions
 
 const calendarReducer = calendarStore.reducer
 
-export { increment, decrement }
+export { increment, decrement, reset }
 export default calendarReducer

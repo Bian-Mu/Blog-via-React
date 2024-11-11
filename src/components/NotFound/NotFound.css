@@ -1,0 +1,12 @@
+#Warn {
+    color: rgb(160, 8, 8);
+    text-align: center;
+    font-size: 4.09rem;
+    margin: 50px 0 40px 0;
+}
+
+#Gif {
+    padding: 0;
+    border: 1rem solid red;
+    justify-self: center;
+}
