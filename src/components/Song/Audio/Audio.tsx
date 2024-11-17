@@ -44,6 +44,7 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef, handleNextSong }) => {
         setCurrentTime(0);
         setIsPlaying(false);
         handleNextSong();
+
     };
 
     //歌曲切换时重新渲染各种状态
@@ -53,12 +54,21 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef, handleNextSong }) => {
                 setDuration(audioRef.current.duration);
                 setCurrentTime(audioRef.current.currentTime);
                 setProgress(0);
+                if (audioRef.current) {
+                    audioRef.current.play()
+                        .then(() => {
+                            setIsPlaying(true)
+                        })
+                }
             }
         };
         const handleTimeUpdate = () => {
             if (audioRef.current) {
                 setCurrentTime(audioRef.current.currentTime);
                 setProgress((audioRef.current.currentTime / audioRef.current.duration) * 100);
+                if (audioRef.current.currentTime / audioRef.current.duration >= 1) {
+                    nextSong()
+                }
             }
         };
 
