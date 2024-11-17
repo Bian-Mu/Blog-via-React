@@ -36,7 +36,7 @@ const Player: React.FC<PlayerProps> = ({ song }) => {
 
     const jumpTo = (time: number) => {
         if (audioRef.current) {
-            audioRef.current.currentTime = time;
+            audioRef.current.currentTime = time + 0.1;
         }
     };
 
