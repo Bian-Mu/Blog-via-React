@@ -36,6 +36,8 @@ function SelfIntro() {
             <hr />
             <p id="description">
                 个人博客
+                <br />
+                不定期更新
             </p>
         </aside>
     )
