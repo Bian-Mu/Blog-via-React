@@ -4,6 +4,7 @@ import "./Player.css"
 import Audio from '../Audio/Audio';
 import { SongInfo } from '../../../store/modules/music';
 import { useSelector } from 'react-redux';
+import Record from "./Record/Record"
 interface LyricLine {
     time: number;
     text: string;
@@ -49,8 +50,8 @@ const Player: React.FC<PlayerProps> = ({ song }) => {
         <div id="main-content-audio" >
             <div id="visible">
                 <div id="songInfo">
-                    <div>《{info.name}》</div>
-                    <img id="recordPic" src={song.pic} alt="pic" />
+                    <div id="songName">《 {info.name} 》</div>
+                    <Record src={song.pic} />
                     <div>{info.singer}    《{info.recordName}》</div>
                 </div>
 

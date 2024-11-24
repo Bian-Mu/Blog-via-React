@@ -10,11 +10,6 @@
     font-size: 20px;
 }
 
-#recordPic {
-    width: 350px;
-    height: 350px;
-    border-radius: 10px;
-}
 
 #songInfo div {
     color: white;
@@ -41,4 +36,8 @@
     background-position: center;
     filter: blur(12px);
     z-index: -1;
+}
+
+#songName {
+    font-size: 23px;
 }
