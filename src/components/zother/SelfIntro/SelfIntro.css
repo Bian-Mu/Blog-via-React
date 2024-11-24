@@ -16,6 +16,7 @@ aside {
 
 aside figure img {
     border-radius: 1.2rem;
+    border: solid grey 1px;
 }
 
 aside>div {

@@ -14,7 +14,7 @@ const nav_list = [
     {
         path: "/diary",
         element: <Diary />,
-        title: "小狗日记",
+        title: "狂犬日记",
         id: 1
     },
     {
@@ -82,7 +82,7 @@ function Nav() {
 
     return (
         <div id="nav-content">
-            <div id="logo">BiAN_Mu</div>
+            <div id="logo">BiAN:Mu</div>
             <header>
                 <nav>
                     <ul>
