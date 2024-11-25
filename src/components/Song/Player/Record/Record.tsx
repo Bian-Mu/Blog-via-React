@@ -7,12 +7,17 @@ interface recordProps {
 
 const Record: React.FC<recordProps> = ({ src }) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
-    const centerX = 75;
-    const centerY = 75;
-    const radius = 50;
+    const ratio = window.devicePixelRatio || 1;
+    const centerX = 175;
+    const centerY = 175;
+    const radius = 125;
     useEffect(() => {
 
         const canvas = canvasRef.current;
+        if (canvas?.width && canvas?.height) {
+            canvas.width = 350 * ratio;
+            canvas.height = 350 * ratio;
+        }
         const ctx = canvas?.getContext('2d');
 
         if (canvas && ctx) {
@@ -20,35 +25,36 @@ const Record: React.FC<recordProps> = ({ src }) => {
             image.src = src;
 
             image.onload = () => {
+                const outerRadius = radius + 25;
                 ctx.save();
-                ctx.scale(2, 1);
+                ctx.scale(ratio, ratio);
+                ctx.imageSmoothingEnabled = true;
+                ctx.imageSmoothingQuality = "high";
                 ctx.beginPath();
-                ctx.arc(centerX, centerY, radius + 15, 0, Math.PI * 2);
+                ctx.arc(centerX, centerY, outerRadius, 0, Math.PI * 2);
                 ctx.fillStyle = 'black';
                 ctx.fill();
 
-                const lineSpacing = 3;
-                const outerRadius = radius + 15;
+                const lineSpacing = 5;
 
                 for (let r = outerRadius - lineSpacing; r >= radius; r -= lineSpacing) {
                     ctx.beginPath();
                     ctx.arc(centerX, centerY, r, 0, Math.PI * 2);
                     ctx.strokeStyle = 'grey';
-                    ctx.lineWidth = 0.2;
+                    ctx.lineWidth = 0.45;
                     ctx.stroke();
                 }
 
                 ctx.beginPath();
                 ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
                 ctx.clip();
-
-                ctx.drawImage(image, centerX - radius, centerY - radius, 100, 100);
+                ctx.drawImage(image, centerX - radius, centerY - radius, 250, 250);
 
                 ctx.restore();
             }
 
         }
-    }, [src])
+    }, [src, ratio])
 
     return (
         <canvas ref={canvasRef} id="recordPic" />
