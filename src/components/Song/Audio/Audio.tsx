@@ -2,6 +2,10 @@ import React from "react";
 import { useEffect, useState } from "react";
 import formatTime from "../utils/formatTime/formatTime";
 import "./Audio.css"
+import {
+    setIsPlaying
+} from "../../../store/modules/music"
+import { useDispatch, useSelector } from "react-redux";
 interface AudioControlsProps {
     audioRef: React.RefObject<HTMLAudioElement>;
     handleNextSong: () => void
@@ -11,7 +15,8 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef, handleNextSong }) => {
     //进度条
     const [progress, setProgress] = useState(0);
     //当前播放状态
-    const [isPlaying, setIsPlaying] = useState(false);
+    const dispatch = useDispatch();
+    const { isPlaying } = useSelector((state: { music: { isPlaying: boolean } }) => state.music)
     //当前播放时间（用于span）
     const [currentTime, setCurrentTime] = useState(0);
     //总时长
@@ -25,7 +30,7 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef, handleNextSong }) => {
     const togglePlayPause = () => {
         if (audioRef.current) {
             isPlaying ? audioRef.current.pause() : audioRef.current.play();
-            setIsPlaying(!isPlaying);
+            dispatch(setIsPlaying(!isPlaying));
         }
     };
 
@@ -42,7 +47,7 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef, handleNextSong }) => {
     const nextSong = () => {
         setProgress(0);
         setCurrentTime(0);
-        setIsPlaying(false);
+        dispatch(setIsPlaying(false));
         handleNextSong();
 
     };
@@ -57,7 +62,7 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef, handleNextSong }) => {
                 if (audioRef.current) {
                     audioRef.current.play()
                         .then(() => {
-                            setIsPlaying(true)
+                            dispatch(setIsPlaying(true))
                         })
                 }
             }

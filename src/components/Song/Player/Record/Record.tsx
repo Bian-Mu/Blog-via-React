@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 import "./Record.css"
 
+import { useDispatch, useSelector } from "react-redux";
 interface recordProps {
     src: string;
     audioState: React.RefObject<HTMLAudioElement>;
@@ -8,22 +9,20 @@ interface recordProps {
 
 const Record: React.FC<recordProps> = ({ src, audioState }) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const ratio = window.devicePixelRatio || 1;
-    const centerX = 175;
-    const centerY = 175;
-    const radius = 125;
-    useEffect(() => {
-        if (audioState.current) {
 
-        }
-    })
+    const ratio = window.devicePixelRatio || 1;
+    const centerX = 175 / ratio;
+    const centerY = 175 / ratio;
+    const radius = 125 / ratio;
+
+    const { isPlaying } = useSelector((state: { music: { isPlaying: boolean } }) => state.music)
+
     useEffect(() => {
 
         const canvas = canvasRef.current;
         if (canvas?.width && canvas?.height) {
-            canvas.width = 350 * ratio;
-            canvas.height = 350 * ratio;
+            canvas.width = 350;
+            canvas.height = 350;
         }
         const ctx = canvas?.getContext('2d');
 
@@ -55,7 +54,7 @@ const Record: React.FC<recordProps> = ({ src, audioState }) => {
                 ctx.beginPath();
                 ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
                 ctx.clip();
-                ctx.drawImage(image, centerX - radius, centerY - radius, 250, 250);
+                ctx.drawImage(image, centerX - radius, centerY - radius, 250 / ratio, 250 / ratio);
 
                 ctx.restore();
             }
@@ -64,8 +63,7 @@ const Record: React.FC<recordProps> = ({ src, audioState }) => {
     }, [src, ratio])
 
     return (
-        <canvas ref={canvasRef} id="recordPic" className={audioState?.play ? "spin" : ""} />
-        // <img id="recordPic" src={src} alt="pic" />
+        <canvas ref={canvasRef} id="recordPic" className={isPlaying ? "spin" : ""} />
     )
 }
 
