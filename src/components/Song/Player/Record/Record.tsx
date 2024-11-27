@@ -1,16 +1,23 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Record.css"
 
 interface recordProps {
     src: string;
+    audioState: React.RefObject<HTMLAudioElement>;
 }
 
-const Record: React.FC<recordProps> = ({ src }) => {
+const Record: React.FC<recordProps> = ({ src, audioState }) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
+    const [isPlaying, setIsPlaying] = useState(false);
     const ratio = window.devicePixelRatio || 1;
     const centerX = 175;
     const centerY = 175;
     const radius = 125;
+    useEffect(() => {
+        if (audioState.current) {
+
+        }
+    })
     useEffect(() => {
 
         const canvas = canvasRef.current;
@@ -57,7 +64,7 @@ const Record: React.FC<recordProps> = ({ src }) => {
     }, [src, ratio])
 
     return (
-        <canvas ref={canvasRef} id="recordPic" />
+        <canvas ref={canvasRef} id="recordPic" className={audioState?.play ? "spin" : ""} />
         // <img id="recordPic" src={src} alt="pic" />
     )
 }

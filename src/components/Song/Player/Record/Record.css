@@ -1,4 +1,4 @@
-#recordPic {
+.spin {
     transform-origin: center;
     animation: rotate 20s linear infinite;
     -webkit-animation: rotate 20s linear infinite;
