@@ -19,7 +19,7 @@ function Draw() {
             for (let topicIndex = 0; topicIndex < topics.length; topicIndex++) {
                 const topic = topics[topicIndex];
                 for (let index = 1; index <= 9; index++) {
-                    const url = `http://localhost:4000/public/2024pic/pic${index}_${topic}.jpg`;
+                    const url = `http://localhost:4000/public/2025pic/pic${index}_${topic}.jpg`;
                     try {
                         const response = await fetch(url);
                         if (response.status !== 201) {
