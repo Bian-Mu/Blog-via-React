@@ -37,7 +37,7 @@ export function MdProvider({ children }: MdProviderProps) {
             const url = `http://localhost:4000/public/2025md/${month}-${today.getDate()}.md`;
             try {
                 const response = await fetch(url);
-                if (response.status !== 201) {
+                if (response.status !== 404) {
                     const initialText = await response.text();
                     updateText(initialText);
                 }

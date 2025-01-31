@@ -42,7 +42,7 @@ const Everyday: React.FC<EverydayProps> = ({ date }) => {
         async () => {
             const url = `http://localhost:4000/public/2025md/${month}-${date}.md`;
             const response = await fetch(url);
-            if (response.status !== 201) {
+            if (response.status !== 404) {
                 return true
             }
         },

@@ -3,8 +3,8 @@ import "./Draw.css"
 import React from "react";
 import { useQuery } from "react-query";
 import Comment from "../zother/Comments/Comment"
-const topics = ["doggie"]
-
+// const topics = ["doggie"]
+const topics = [] as string[]
 interface Pic {
     src: string;
     id: string;
@@ -22,7 +22,7 @@ function Draw() {
                     const url = `http://localhost:4000/public/2025pic/pic${index}_${topic}.jpg`;
                     try {
                         const response = await fetch(url);
-                        if (response.status !== 201) {
+                        if (response.status !== 404) {
                             newPic.push({ src: url, id: `${topicIndex}-${index}` });
                             currentPic = [...newPic]
                         }
