@@ -10,11 +10,6 @@
     font-size: 20px;
 }
 
-#recordPic {
-    width: 350px;
-    height: 350px;
-    border-radius: 10px;
-}
 
 #songInfo div {
     color: white;
@@ -24,10 +19,25 @@
 }
 
 #main-content-audio {
+    position: relative;
     width: 1120px;
     height: 620px;
+}
+
+#main-content-audio::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background-image: var(--background-image-url);
-    background-size: 300%;
+    background-size: 150%;
     background-position: center;
-    border-radius: 10px;
+    filter: blur(12px);
+    z-index: -1;
+}
+
+#songName {
+    font-size: 23px;
 }

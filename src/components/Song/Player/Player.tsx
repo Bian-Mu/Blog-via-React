@@ -4,20 +4,22 @@ import "./Player.css"
 import Audio from '../Audio/Audio';
 import { SongInfo } from '../../../store/modules/music';
 import { useSelector } from 'react-redux';
+import Record from "./Record/Record"
 interface LyricLine {
     time: number;
     text: string;
 }
 
-interface Song {
+export interface Music {
     pic: string;
     lyrics: LyricLine[];
     audio: string;
+    handleNextSong: () => void
 }
 
 
 interface PlayerProps {
-    song: Song;
+    song: Music;
 }
 
 const Player: React.FC<PlayerProps> = ({ song }) => {
@@ -35,7 +37,7 @@ const Player: React.FC<PlayerProps> = ({ song }) => {
 
     const jumpTo = (time: number) => {
         if (audioRef.current) {
-            audioRef.current.currentTime = time;
+            audioRef.current.currentTime = time + 0.1;
         }
     };
 
@@ -48,8 +50,8 @@ const Player: React.FC<PlayerProps> = ({ song }) => {
         <div id="main-content-audio" >
             <div id="visible">
                 <div id="songInfo">
-                    <div>《{info.name}》</div>
-                    <img id="recordPic" src={song.pic} alt="pic" />
+                    <div id="songName">《 {info.name} 》</div>
+                    <Record src={song.pic} audioState={audioRef} />
                     <div>{info.singer}    《{info.recordName}》</div>
                 </div>
 
@@ -57,7 +59,7 @@ const Player: React.FC<PlayerProps> = ({ song }) => {
                     <Lyrics lyrics={song.lyrics} currentTime={currentTime} onLineClick={jumpTo} />
                 </div>
             </div>
-            <Audio audioRef={audioRef} />
+            <Audio audioRef={audioRef} handleNextSong={song.handleNextSong} />
             <audio
                 ref={audioRef}
                 src={song.audio}

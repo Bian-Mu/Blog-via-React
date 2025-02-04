@@ -1,5 +1,53 @@
 #main-content-novel {
+    position: relative;
+    margin: 40px 0 0 0;
+    width: 1120px;
+    height: 620px;
+}
+
+#main-content-novel::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(../../assets/image/waterglass.png);
+    background-size: cover;
+    background-position: center;
+    filter: blur(3px);
+    z-index: -1;
+}
+
+#novelInfo {
+    margin: 40px 40px 0 50px;
+    display: grid;
+    grid-template-columns: 2fr 4fr;
+}
+
+#novelRecord {
+    margin: 40px 0 0 0;
+    border: 4px solid grey;
+    border-radius: 6px;
+    width: 205px;
+    height: 310px;
+}
+
+#novelBrief :nth-child(1) {
+    display: block;
+    margin: 40px 0 0 0;
+    font-size: 35px;
+    color: white;
+}
+
+#novelBrief :nth-child(2) {
+    display: block;
+    font-size: 20px;
+}
+
+#novelLink {
+    height: 200px;
+    line-height: 200px;
     text-align: center;
-    font-size: 4.09rem;
-    margin: 22% 0 0 0;
+    font-size: 30px;
 }

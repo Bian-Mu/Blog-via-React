@@ -8,6 +8,14 @@ article {
     background-color: rgba(244, 202, 231, 0.5);
 }
 
+.songLocation {
+    background-color: rgba(200, 200, 200, 0.4);
+}
+
+.novelLocation {
+    background-color: rgba(200, 200, 200, 0.4);
+}
+
 article {
     display: inline-block;
     width: 1340px;
@@ -19,4 +27,19 @@ article {
     padding-left: 3%;
     padding-right: 3%;
 
+}
+
+::selection {
+    background: #d3d3d3;
+    color: #555;
+}
+
+::-moz-selection {
+    background: #d3d3d3;
+    color: #555;
+}
+
+::-webkit-selection {
+    background: #d3d3d3;
+    color: #555;
 }

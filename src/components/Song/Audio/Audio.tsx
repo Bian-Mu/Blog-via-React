@@ -1,38 +1,43 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { setClick } from "../../../store/modules/music";
-import { useDispatch, useSelector } from "react-redux";
 import formatTime from "../utils/formatTime/formatTime";
 import "./Audio.css"
+import {
+    setIsPlaying
+} from "../../../store/modules/music"
+import { useDispatch, useSelector } from "react-redux";
 interface AudioControlsProps {
     audioRef: React.RefObject<HTMLAudioElement>;
+    handleNextSong: () => void
 }
 
-const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
+const Audio: React.FC<AudioControlsProps> = ({ audioRef, handleNextSong }) => {
     //进度条
     const [progress, setProgress] = useState(0);
     //当前播放状态
-    const [isPlaying, setIsPlaying] = useState(false);
+    const dispatch = useDispatch();
+    const { isPlaying } = useSelector((state: { music: { isPlaying: boolean } }) => state.music)
     //当前播放时间（用于span）
     const [currentTime, setCurrentTime] = useState(0);
     //总时长
     const [duration, setDuration] = useState(0);
-
-    const dispatch = useDispatch();
-    const { click } = useSelector((state: { music: { click: boolean } }) => state.music);
+    //用于初始化第一首歌
+    useEffect(() => {
+        handleNextSong()
+    }, [])
 
     //切换歌曲状态
     const togglePlayPause = () => {
         if (audioRef.current) {
             isPlaying ? audioRef.current.pause() : audioRef.current.play();
-            setIsPlaying(!isPlaying);
+            dispatch(setIsPlaying(!isPlaying));
         }
     };
 
     //点击进度条
     const changeProgress = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newProgress = parseFloat(e.target.value);
-        setProgress(newProgress);
+        setProgress(newProgress ? newProgress : 0);
         if (audioRef.current) {
             audioRef.current.currentTime = (newProgress / 100) * audioRef.current.duration;
         }
@@ -42,8 +47,9 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
     const nextSong = () => {
         setProgress(0);
         setCurrentTime(0);
-        setIsPlaying(false);
-        dispatch(setClick(click));
+        dispatch(setIsPlaying(false));
+        handleNextSong();
+
     };
 
     //歌曲切换时重新渲染各种状态
@@ -53,12 +59,21 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
                 setDuration(audioRef.current.duration);
                 setCurrentTime(audioRef.current.currentTime);
                 setProgress(0);
+                if (audioRef.current) {
+                    audioRef.current.play()
+                        .then(() => {
+                            dispatch(setIsPlaying(true))
+                        })
+                }
             }
         };
         const handleTimeUpdate = () => {
             if (audioRef.current) {
                 setCurrentTime(audioRef.current.currentTime);
                 setProgress((audioRef.current.currentTime / audioRef.current.duration) * 100);
+                if (audioRef.current.currentTime / audioRef.current.duration >= 1) {
+                    nextSong()
+                }
             }
         };
 
@@ -85,7 +100,7 @@ const Audio: React.FC<AudioControlsProps> = ({ audioRef }) => {
                     type="range"
                     min="0"
                     max="100"
-                    value={progress}
+                    value={progress.toString()}
                     onChange={changeProgress}
                 />
                 <span>{formatTime(duration)}</span>

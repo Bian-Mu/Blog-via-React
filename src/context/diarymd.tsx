@@ -18,7 +18,7 @@ const MdContext = createContext<MdContextType | undefined>(undefined);
 export function MdProvider({ children }: MdProviderProps) {
     let today = new Date();
     const { month } = useSelector((state: { calendar: { month: number } }) => state.calendar)
-    let time = `2024/${month}/${today.getDate()}`;
+    let time = `2025/${month}/${today.getDate()}`;
 
     const [title, SetTitle] = useState(time)
     const [text, SetText] = useState(marked("## Temporarily blank") as string)
@@ -34,10 +34,10 @@ export function MdProvider({ children }: MdProviderProps) {
     useEffect(() => {
         async function initialGetMd() {
 
-            const url = `http://localhost:4000/public/2024md/${month}-${today.getDate()}.md`;
+            const url = `http://localhost:4000/public/2025md/${month}-${today.getDate()}.md`;
             try {
                 const response = await fetch(url);
-                if (response.status !== 201) {
+                if (response.status !== 204) {
                     const initialText = await response.text();
                     updateText(initialText);
                 }

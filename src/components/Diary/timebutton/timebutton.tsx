@@ -14,7 +14,7 @@ const MonthList: React.FC = () => {
     return (
         <>
             <button className="monthConvert" onClick={() => dispatch(decrement())}>◀</button>
-            <p id="monthDisplay">2024 ⇨ {month}</p>
+            <p id="monthDisplay">2025 ⇨ {month}</p>
             <button className="monthConvert" onClick={() => dispatch(increment())}>▶</button>
         </>
     )
@@ -28,10 +28,10 @@ const Everyday: React.FC<EverydayProps> = ({ date }) => {
     const { updateTitle, updateText } = useMd()
 
     async function getMd() {
-        const url = `http://localhost:4000/public/2024md/${month}-${date}.md`;
+        const url = `http://localhost:4000/public/2025md/${month}-${date}.md`;
         try {
             const response = await fetch(url);
-            updateTitle(`2024/${month}/${date}`)
+            updateTitle(`2025/${month}/${date}`)
             updateText(await response.text())
 
         } catch (error) {
@@ -40,9 +40,9 @@ const Everyday: React.FC<EverydayProps> = ({ date }) => {
     }
     const { data: isAvailable } = useQuery([month, date],
         async () => {
-            const url = `http://localhost:4000/public/2024md/${month}-${date}.md`;
+            const url = `http://localhost:4000/public/2025md/${month}-${date}.md`;
             const response = await fetch(url);
-            if (response.status !== 201) {
+            if (response.status !== 204) {
                 return true
             }
         },
@@ -62,7 +62,7 @@ const Everyday: React.FC<EverydayProps> = ({ date }) => {
     //     }
     //     else {
     //         const fetchData = async () => {
-    //             const url = `http://localhost:4000/public/2024md/${month}-${date}.md`;
+    //             const url = `http://localhost:4000/public/2025md/${month}-${date}.md`;
     //             try {
     //                 const response = await fetch(url);
     //                 if (response.status !== 201) { //文件不存在
@@ -99,7 +99,7 @@ const Everyday: React.FC<EverydayProps> = ({ date }) => {
 function DaysList() {
     const { month } = useSelector((state: { calendar: { month: number } }) => state.calendar)
 
-    let daysInMonth = new Date(2024, month, 0).getDate();
+    let daysInMonth = new Date(2025, month, 0).getDate();
     let daysArray = Array.from({ length: daysInMonth }, (x, i) => i + 1)
 
     return (

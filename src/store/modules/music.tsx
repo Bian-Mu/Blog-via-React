@@ -19,8 +19,8 @@ export interface MusicState {
     playlist: eachSong[];
     currentSongId: number | null;
     random: number;
-    click: boolean;
     flac: string;
+    isPlaying: boolean
 }
 
 const initialState: MusicState = {
@@ -35,8 +35,8 @@ const initialState: MusicState = {
     }],
     currentSongId: null,
     random: 0,
-    click: true,
-    flac: ""
+    flac: "",
+    isPlaying: false
 }
 
 const musicStore = createSlice({
@@ -67,13 +67,13 @@ const musicStore = createSlice({
         setRandom(state, action: PayloadAction<number>) {
             state.random = action.payload;
         },
-        //切歌
-        setClick(state, action: PayloadAction<boolean>) {
-            state.click = !action.payload;
-        },
         //音频
         setFlac(state, action: PayloadAction<string>) {
             state.flac = action.payload;
+        },
+        //音频播放状态
+        setIsPlaying(state, action: PayloadAction<boolean>) {
+            state.isPlaying = action.payload
         }
     }
 })
@@ -85,8 +85,8 @@ export const {
     setPlaylist,
     setCurrentSongId,
     setRandom,
-    setClick,
-    setFlac
+    setFlac,
+    setIsPlaying
 } = musicStore.actions
 
 const musicReducer = musicStore.reducer
