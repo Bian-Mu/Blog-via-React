@@ -4,10 +4,10 @@ import "./Record.css"
 import { useDispatch, useSelector } from "react-redux";
 interface recordProps {
     src: string;
-    audioState: React.RefObject<HTMLAudioElement>;
+    // audioState: React.RefObject<HTMLAudioElement>;
 }
 
-const Record: React.FC<recordProps> = ({ src, audioState }) => {
+const Record: React.FC<recordProps> = ({ src }) => {
     const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     const ratio = window.devicePixelRatio || 1;
