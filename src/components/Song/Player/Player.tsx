@@ -51,7 +51,7 @@ const Player: React.FC<PlayerProps> = ({ song }) => {
             <div id="visible">
                 <div id="songInfo">
                     <div id="songName">《 {info.name} 》</div>
-                    <Record src={song.pic} audioState={audioRef} />
+                    <Record src={song.pic} />
                     <div>{info.singer}    《{info.recordName}》</div>
                 </div>
 

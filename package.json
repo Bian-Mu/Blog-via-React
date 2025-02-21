@@ -23,7 +23,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "startall": "react-scripts start & cd ../backend && node app.js",
+    "startall": "react-scripts start & cd ../backend && go run main.go",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

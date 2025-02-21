@@ -1,0 +1,72 @@
+#upload-overlay {
+    position: absolute;
+    top: 26.5%;
+    left: 39%;
+    width: 18rem;
+    height: 14rem;
+    background-color: rgb(255, 255, 220);
+    border: 0.17rem solid rgb(255, 220, 187);
+    border-radius: 0.6rem;
+    box-shadow: 0 0.22rem 0.66rem rgba(0, 0, 0, 0.2);
+
+    z-index: 1000;
+}
+
+#upload-overlay h3 {
+    margin-top: 10%;
+    padding-bottom: 3%;
+    text-align: center;
+}
+
+.upload-ability {
+    margin: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-ability>button:hover {
+    background-color: rgb(0, 0, 0);
+}
+
+.upload-ability>button {
+    border: 0;
+    border-radius: 1rem;
+    padding: 0.3rem 0.5rem 0.3rem 0.5rem;
+    margin: 6px 32px 0 32px;
+}
+
+.upload-ability>button>mark {
+    color: rgb(0, 0, 0);
+    font-size: 0.8rem;
+    background: transparent;
+}
+
+.upload-ability>button>mark:hover {
+    color: rgb(255, 255, 255);
+}
+
+.upload-ability input {
+    border: solid grey 0.12rem;
+    border-radius: 0.4rem;
+    width: 88px;
+}
+
+.upload-ability input:hover {
+    border: solid rgb(255, 255, 255) 0.12rem;
+}
+
+#upload-file {
+    display: none;
+}
+
+.upload-ability:nth-of-type(1) label {
+    display: inline-block;
+    padding: 2px 10px;
+    background-color: #ffdf94;
+    border: 1px solid #ffdf94;
+    border-radius: 0.8rem;
+    cursor: pointer;
+    color: #000000;
+    font-size: 0.85rem;
+}

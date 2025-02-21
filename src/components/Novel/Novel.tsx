@@ -23,12 +23,12 @@ function Novel() {
                     </span>
                     <br />
                     <p>
-                        反复挣扎，笑比哭难看的与几年青春握手言和
+                        None
                     </p>
                 </div>
             </div>
             <div id="novelLink">
-                暂未发表于互联网，敬请期待
+
             </div>
         </div>
     )
