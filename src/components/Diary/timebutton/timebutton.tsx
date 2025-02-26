@@ -28,7 +28,7 @@ const Everyday: React.FC<EverydayProps> = ({ date }) => {
     const { updateTitle, updateText } = useMd()
 
     async function getMd() {
-        const url = `http://localhost:4000/public/2025md/${month}-${date}.md`;
+        const url = `https://blog.bianmu.link:6109/public/2025md/${month}-${date}.md`;
         try {
             const response = await fetch(url);
             updateTitle(`2025/${month}/${date}`)
@@ -40,7 +40,7 @@ const Everyday: React.FC<EverydayProps> = ({ date }) => {
     }
     const { data: isAvailable } = useQuery([month, date],
         async () => {
-            const url = `http://localhost:4000/public/2025md/${month}-${date}.md`;
+            const url = `https://blog.bianmu.link:6109/public/2025md/${month}-${date}.md`;
             const response = await fetch(url);
             if (response.status !== 204) {
                 return true
@@ -62,7 +62,7 @@ const Everyday: React.FC<EverydayProps> = ({ date }) => {
     //     }
     //     else {
     //         const fetchData = async () => {
-    //             const url = `http://localhost:4000/public/2025md/${month}-${date}.md`;
+    //             const url = `https://blog.bianmu.link:6109/public/2025md/${month}-${date}.md`;
     //             try {
     //                 const response = await fetch(url);
     //                 if (response.status !== 201) { //文件不存在
