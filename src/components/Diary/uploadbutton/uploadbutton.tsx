@@ -29,7 +29,7 @@ const UploadPage: React.FC<UploadProps> = ({ uploadState }) => {
             data.append("password", password)
 
             try {
-                const response = await fetch(`http://localhost:4000/public/uploadMD`, {
+                const response = await fetch(`https://blog.bianmu.link:6109/public/uploadMD`, {
                     method: 'POST',
                     body: data,
                 })

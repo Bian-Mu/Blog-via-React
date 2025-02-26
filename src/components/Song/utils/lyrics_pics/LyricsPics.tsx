@@ -14,7 +14,7 @@ interface eachSong {
 // 本功能使用网易云api
 
 export async function songInfoGet(songId: number): Promise<SongInfo | null> {
-    const songUrl = `http://localhost:4000/api/songInfo?songId=${songId}`;
+    const songUrl = `https://blog.bianmu.link:6109/api/songInfo?songId=${songId}`;
 
     try {
         const response = await fetch(songUrl);
@@ -35,7 +35,7 @@ export async function songInfoGet(songId: number): Promise<SongInfo | null> {
 }
 
 export async function songLyricsGet(songId: number): Promise<string | null> {
-    const lyricsUrl = `http://localhost:4000/api/lyricsInfo?songId=${songId}`;
+    const lyricsUrl = `https://blog.bianmu.link:6109/api/lyricsInfo?songId=${songId}`;
 
     try {
         const response = await fetch(lyricsUrl);
@@ -50,7 +50,7 @@ export async function songLyricsGet(songId: number): Promise<string | null> {
 }
 
 export async function songPicGet(picUrl: string): Promise<string | null> {
-    const url = `http://localhost:4000/api/picInfo?picUrl=${picUrl}`;
+    const url = `https://blog.bianmu.link:6109/api/picInfo?picUrl=${picUrl}`;
 
     try {
         const response = await fetch(url);
@@ -66,7 +66,7 @@ export async function songPicGet(picUrl: string): Promise<string | null> {
 
 
 export async function getPlaylist(): Promise<eachSong[]> {
-    const url = `http://localhost:4000/api/playlist`
+    const url = `https://blog.bianmu.link:6109/api/playlist`
     const response = await fetch(url)
     const playlist = await response.json()
     return playlist

@@ -34,7 +34,7 @@ export function MdProvider({ children }: MdProviderProps) {
     useEffect(() => {
         async function initialGetMd() {
 
-            const url = `http://localhost:4000/public/2025md/${month}-${today.getDate()}.md`;
+            const url = `https://blog.bianmu.link:6109/public/2025md/${month}-${today.getDate()}.md`;
             try {
                 const response = await fetch(url);
                 if (response.status !== 204) {
